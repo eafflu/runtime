@@ -1,0 +1,91 @@
+<!doctype html>
+
+<html>
+    <head>
+        <meta charset="utf-8">
+
+        <title>Operation Spark || Circular Attack!</title>
+        <meta name="description" content="Operation Spark Motion Poem">
+        <meta name="author" content="operationspark.org">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+        <link href="css/style.css" rel="stylesheet">
+
+        <!-- all core CreateJS and 3rd party libraries are listed here: -->
+        <script src="bower_components/lodash/lodash.min.js"></script>
+        <script src="bower_components/proton/build/proton-1.0.0.min.js"></script>
+        <script src="bower_components/easeljs/lib/easeljs-0.8.0.min.js"></script>
+        <script src="bower_components/PreloadJS/lib/preloadjs-0.6.0.min.js"></script>
+        <script src="bower_components/TweenJS/lib/tweenjs-0.6.0.min.js"></script>
+        <script src="bower_components/SoundJS/lib/soundjs-0.6.0.min.js"></script>
+        <script src="bower_components/opspark-draw/draw.js"></script>
+        <script src="bower_components/racket/racket.js"></script>
+
+        <!-- our app javascript code -->
+        <script src="js/particle/particleManager.js"></script>
+        <script src="js/orb/orbManager.js"></script>
+        <script src="js/player/player.js"></script>
+        <script src="js/player/playerManager.js"></script>
+        <script src="js/projectile/projectileManager.js"></script>
+        <script src="js/hud/hud.js"></script>
+        <script src="js/opspark.js"></script>
+        
+        <style type="text/css">
+            /*override default styles here*/
+        </style>
+    </head>
+    <body>
+        <div>
+            <canvas id="canvas" width="500" height="500"></canvas>
+        </div>
+        <script id="motion-poem">
+            (function(){
+                'use strict';
+                
+                var 
+                    Proton = window.Proton,
+                    opspark = window.opspark,
+                    draw = opspark.draw,
+                    physikz = opspark.racket.physikz,
+                    
+                    app = opspark.makeApp({update: update}),
+                    canvas = app.canvas, 
+                    view = app.view,
+                    fps = draw.fps('#000');
+                
+                var space, player, hud, orbManager, playerManager, particleManager;
+                
+                space = [];
+                hud = opspark.makeHud();
+                particleManager = opspark.makeParticleManager(app.stage);
+                orbManager = opspark.makeOrbManager(view, space, hud, particleManager).addOrbs(25);
+                
+                player = opspark.makePlayer(null, null, particleManager);
+                view.addChild(player);
+                space.push(player);
+                
+                playerManager = opspark.makePlayerManager(player,
+                    view, 
+                    space,
+                    hud,
+                    opspark.makeProjectileManager(view, space, particleManager),
+                    particleManager.makePlayerEmitter());
+                    
+                app.addUpdateable(playerManager);
+                
+                view.addChild(hud);
+                
+                view.addChild(fps);
+                app.addUpdateable(fps);
+                
+                function update() {
+                    for (var i = 0; i < space.length; i++) {
+                        physikz.updateRadialPositionAndReboundInArea(space[i], canvas);
+                        physikz.updateSpace(space, 0.005);
+                    }
+                }
+            })();
+        </script>
+    </body>
+</html>
