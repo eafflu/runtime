@@ -31,13 +31,13 @@
         <script src="js/particle/particleManager.js"></script>
         <script src="js/orb/orbManager.js"></script>
         <script src="js/projectile/projectileManager.js"></script>
-        <!--<script src="js/hud/hud.js"></script>-->
-        
         <script src="js/view/pacifier.js"></script>
         <script src="js/view/ground.js"></script>
         <script src="js/player/halle.js"></script>
         <script src="js/player/playerManager.js"></script>
         <script src="js/opspark.js"></script>
+
+        <!-- add any additional scripts here -->
         
         <style type="text/css">
             /*override default styles here*/
@@ -74,7 +74,6 @@
                     particleManager;
                 
                 space = [];
-                //hud = opspark.makeHud();
                 particleManager = opspark.makeParticleManager(app.stage);
                 ground = opspark.makeGround(app);
                 
@@ -105,8 +104,6 @@
                             opspark.makeProjectileManager(view, space, particleManager));
                         app.addUpdateable(playerManager);
                     });
-                
-                // view.addChild(hud);
                 
                 view.addChild(fps);
                 app.addUpdateable(fps);
