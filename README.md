@@ -5,15 +5,15 @@ Meet Halle, the official Operation Spark robot.
 
 ![Halle](http://i.imgur.com/yUKA9EN.gif)
 
-Halle has some cool moves, but nothing to play with. Let's build our own game using Halle!
+Halle has some cool moves but nobody to play with. Let's build our own game using Halle!
 
 # Step 1 - Getting Started
 
-Install this project into your workspace by typing `opspark install` into the console and choosing `runtime`
+Install this project into your Cloud9 workspace by typing `opspark install` into a terminal and choosing the `runtime` project.
 
-You can then run the game by opening `index.html` and then choosing *Preview*. You should see Halle running on a blank screen and you should be able to press the approprite keys to make him jump and shoot. 
+You can run the game by opening `index.html` and then choosing *Preview*. You should see Halle running on a blank background and you should be able to press the appropriate keys to make her jump and shoot. 
 
-Now go back and look at the `index.html` file in Cloud9. `index.html` is an example of the kind of code you might see in a real-world project. The majority of the code is not in `index.html` itself but is loaded in as external scripts. 
+Now go back and look at the `index.html` file in Cloud9. `index.html` is an example of the kind of code you might see in a real-world project. The majority of the code is not in `index.html` itself but is loaded as external scripts. 
 
 ```
 <script src="js/util/load.js"></script>
@@ -27,7 +27,7 @@ Now go back and look at the `index.html` file in Cloud9. `index.html` is an exam
 <script src="js/opspark.js"></script>
 ```
 
-The scripts are organized so that each script handles one aspect of the game. The scripts are named to describe what they do. Professional developers break code into scripts or modules so that they can keep the code the easy to understand and so that many people can work on the code at the same time.
+The scripts are organized so that each script handles one aspect of the game, with each name describing what they do. Professional developers break code into scripts or modules so that the code is easier to understand and so that many people can work on the code at the same time.
 
 Some of the scripts are *library* or *third-party* code. This is code that other people wrote that we can use to do cool stuff.
 
@@ -39,15 +39,17 @@ Some of the scripts are *library* or *third-party* code. This is code that other
 <script src="bower_components/opspark-draw/draw.js"></script>
 ```
 
-We will be using the [create.js](http://createjs.com/) library to draw and animate our game. 
+For this project, we will be using the [create.js](http://createjs.com/) library to draw and animate our game. 
 
 # Step 2 - Brainstorming
 
-Before we start coding, we have to decide what kind of game we want to build with Halle. Look at the kind of moves that Halle can make and imagine how they would fit into your game. 
+Before we start coding, we have to decide what kind of game we want to build with Halle. Look at the kind of moves that Halle can make and imagine how they would fit into **your** game. 
 
 You will need to decide on a general *theme* for the game. What kind of world is Halle in? Is she in space, in a factory, on the streets of New Orleans? 
 
-What are the *game mechanics*? What are the goals and what are the challenges? What might halle encounter as the game progresses? Are there points or a score? How does the game end? You've seen what Halle can do. How does that fit into your game?
+What are the *game mechanics*? What are the goals and what are the challenges? What might halle encounter as the game progresses? Are there points or a score? How does the game end? 
+
+Finally, come up with a good *name* for your game. Having a great name for a project is an important step, but don't worry, you can always change it later. 
 
 # Step 3 - HUD
 
@@ -63,7 +65,7 @@ Now, add one more line of code
 
     window.hud = hud;
 
-By assigning our variable to a property on the `window` object, we can play with it in the console. Open up the console in Chrome Developer Tools and type each of these code statements. What do they do?
+By assigning the `hud` variable to a property on the `window` object, we can play with it in the console. Open up the console in Chrome Developer Tools and type each of these code statements. What do they do?
 
     hud.updateScore(10);
 
@@ -77,14 +79,14 @@ By assigning our variable to a property on the `window` object, we can play with
 
 # Step 4 - Creating A Background
 
-Include the script `src/view/background.js` in the same way you include `hud.js`. Find the script that is included and determine what function you need to call in order to create the background. Modify `index.html` at `TODO: 2` to call that function. You will need to supply the appropriate arguments to the function. 
+Include the script `src/view/background.js` in the same way you included `hud.js`. Find the script that is included and determine what function you need to call in order to create the background. Modify `index.html` at `TODO: 2` to call that function. You will need to supply the appropriate arguments to the function. 
 
     var background = // ????
     view.addChild(background);
 
 Once this is done correctly you should see Halle on a yellow background. 
 
-Our goal is to create our a great background for our game. You will want to change the code at `TODO: 3` in `src/view/background.js`.
+Our first goal is to create a great background for our game. That will require drawing. 
 
 In order to draw something you will create a *shape* using one of the following functions:
 
@@ -97,11 +99,13 @@ and then you can add a shape to the background by calling:
 
      background.addChild(shape);
 
+This code should go at `TODO: 3` in `src/view/background.js` within the `render()` function. 
+
 See the [opspark-draw documentation](https://libraries.io/bower/opspark-draw) for more details on drawing functions you can use or look at the source directly in your project at `bower_components/opspark-draw/draw.js`. You can also use anything in the [create.js API](http://www.createjs.com/docs/easeljs/modules/EaselJS.html).
 
-With just these simple functions, you can do quite a bit. Start by adjusting the background to a color you like and then fix the code so that it only shows the background color above the the ground. 
+With just these simple functions and your current javascript knowledge, you can create almost anything.  
 
-Then, write more code to draw whatever you like!
+Start by adjusting the background to a color you like and then fix the code so that it only shows the background color above the the ground. Then, draw something new to your background.
 
 One place to start is to use a [for loop](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for) to draw a bunch of objects to the screen. Start with this:
 
@@ -122,13 +126,13 @@ var moon = draw.bitmap('img/moon.png',100,125);
 background.addChild(moon);
 ```
 
-and then see what you can make.
+Now see what you can make!
 
 Finally, depending on the background you've built, your heads-up-display may be hard to see or just plain ugly. Modify the colors used by `src/view/hud.js` to match your background.
 
 # Step 5 - Animation and Parallax
 
-Parallax is a technique in animation for giving the illusion of depth. When you are moving, things that are close to you move quickly whereas things that are very far away may move slowly or not appear to move at all. We can use this technique in our game to create really interesting backgrounds. 
+Parallax is a technique in animation for giving the illusion of depth. When you are moving, things that are close to you move quickly whereas things that are very far away may move slowly or not appear to move at all. We can use this technique in our game to create visually interesting backgrounds. 
 
 To illustrate this, let's draw a box on the screen. We will call it `backgroundBox`.
 
@@ -151,7 +155,7 @@ In the `update()` function, add the following code:
 
     backgroundBox.x = backgroundBox.x - 1;
 
-What is going on here?
+What happened? Why is it doing that? Make sure you understand and make sure your partner (if you are pairing) understands as well. 
 
 Now try adding the following code to `update()`
 
@@ -163,4 +167,4 @@ if(backgroundBox.x < -backgroundBox.getBounds().width) {
 
 What is going on here?
 
-You can use this technique to create a background with objects that move at different speeds. How would you do that?
+Try using this technique to create a background with objects that move at different speeds. 
