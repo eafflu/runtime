@@ -84,7 +84,7 @@ Include the script `src/view/background.js` in the same way you include `hud.js`
 
 Once this is done correctly you should see Halle on a yellow background. 
 
-Create a different background for the game. You will want to change the code at `TODO: 3` in `src/view/background.js`.
+Our goal is to create our a great background for our game. You will want to change the code at `TODO: 3` in `src/view/background.js`.
 
 In order to draw something you will create a *shape* using one of the following functions:
 
@@ -97,10 +97,64 @@ and then you can add a shape to the background by calling:
 
      background.addChild(shape);
 
-See the [opspark-draw documentation](https://libraries.io/bower/opspark-draw) for more details on drawing functions you can use. 
+See the [opspark-draw documentation](https://libraries.io/bower/opspark-draw) for more details on drawing functions you can use or look at the source directly in your project at `bower_components/opspark-draw/draw.js`. You can also use anything in the [create.js API](http://www.createjs.com/docs/easeljs/modules/EaselJS.html).
+
+With just these simple functions, you can do quite a bit. Start by adjusting the background to a color you like and then fix the code so that it only shows the background color above the the ground. 
+
+Then, write more code to draw whatever you like!
+
+One place to start is to use a [for loop](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for) to draw a bunch of objects to the screen. Start with this:
+
+```js
+var circle;
+for(var i=0;i<100;i++) {
+    circle = draw.circle(10,'purple','black',1);
+    circle.x = canvasWidth*Math.random();
+    circle.y = canvasHeight*Math.random();
+    background.addChild(circle);
+}
+```
+
+and then see what you can make.
+
 
 Finally, depending on the background you've built, your heads-up-display may be hard to see or just plain ugly. Modify the colors used by `src/view/hud.js` to match your background.
 
-# Step 5 - Background Parallax
+# Step 5 - Animation and Parallax
 
-TODO!
+Parallax is a technique in animation for giving the illusion of depth. When you are moving, things that are close to you move quickly whereas things that are very far away may move slowly or not appear to move at all. We can use this technique in our game to create really interesting backgrounds. 
+
+To illustrate this, let's draw a box on the screen. We will call it `backgroundBox`.
+
+In `background.js`, declare a variable `backgroundBox` directly after the `background` variable declaration.
+
+Then in the `render()` function, store a rectangle in `backgroundBox` and add it to 
+
+```js
+backgroundBox = draw.rect(100,100,'Gray');
+backgroundBox.x = 300;
+backgroundBox.y = 200;
+background.addChild(backgroundBox);
+```
+
+You should now see a gray box in your background.
+
+Now we are going to animate our box. The `update()` function is called once for every frame of our game. In the update() function you can change the position of our box by changing the `x` and `y` properties of the object.
+
+In the `update()` function, add the following code:
+
+    backgroundBox.x = backgroundBox.x - 1;
+
+What is going on here?
+
+Now try adding the following code to `update()`
+
+```js
+if(backgroundBox.x < -backgroundBox.getBounds().width) {
+    backgroundBox.x = canvasWidth;
+}
+```
+
+What is going on here?
+
+You can use this technique to create a background with objects that move at different speeds. How would you do that?
