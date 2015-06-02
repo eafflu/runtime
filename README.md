@@ -115,6 +115,14 @@ for(var i=0;i<100;i++) {
 }
 ```
 
+You can also include images using `draw.bitmap()`
+
+```
+var moon = draw.bitmap('http://images.clipartpanda.com/moon-clip-art-KijpdXRiq.png',100,125);
+background.addChild(moon);
+```
+
+
 and then see what you can make.
 
 
