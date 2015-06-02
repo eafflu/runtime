@@ -99,7 +99,7 @@ and then you can add a shape to the background by calling:
 
      background.addChild(shape);
 
-This code should go at `TODO: 3` in `src/view/background.js` within the `render()` function. 
+This code should go at `TODO: 3` in `js/view/background.js` within the `render()` function. 
 
 See the [opspark-draw documentation](https://libraries.io/bower/opspark-draw) for more details on drawing functions you can use or look at the source directly in your project at `bower_components/opspark-draw/draw.js`. You can also use anything in the [create.js API](http://www.createjs.com/docs/easeljs/modules/EaselJS.html).
 
