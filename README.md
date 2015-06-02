@@ -118,13 +118,11 @@ for(var i=0;i<100;i++) {
 You can also include images using `draw.bitmap()`
 
 ```
-var moon = draw.bitmap('http://images.clipartpanda.com/moon-clip-art-KijpdXRiq.png',100,125);
+var moon = draw.bitmap('img/moon.png',100,125);
 background.addChild(moon);
 ```
 
-
 and then see what you can make.
-
 
 Finally, depending on the background you've built, your heads-up-display may be hard to see or just plain ugly. Modify the colors used by `src/view/hud.js` to match your background.
 
