@@ -89,7 +89,7 @@
                     .then(function (ss) {
                         spritesheet = ss;
                         
-                        halle = window.opspark.makeHalle(spritesheet, particleManager, true);
+                        halle = window.opspark.makeHalle(spritesheet, particleManager, false);
                         halle.x = halle.getBounds().width * 2;
                         halle.y = ground.y - halle.getBounds().height + 3;
                         app.addUpdateable(halle);
