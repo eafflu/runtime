@@ -3,6 +3,7 @@
     
     window.opspark = window.opspark || {};
     var draw = window.opspark.draw;
+    var createjs = window.createjs;
     
     /*
      * Create a background view for our game application
