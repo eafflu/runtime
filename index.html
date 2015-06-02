@@ -37,8 +37,8 @@
         <script src="js/player/playerManager.js"></script>
         <script src="js/opspark.js"></script>
 
-        <!-- add any additional scripts here -->
-        
+       <!-- add any additional scripts here -->
+
         <style type="text/css">
             /*override default styles here*/
         </style>
@@ -76,6 +76,8 @@
                 space = [];
                 particleManager = opspark.makeParticleManager(app.stage);
                 ground = opspark.makeGround(app);
+
+                // TODO: 2
                 
                 var help = draw.textfield('MOVES || w: jump | e: flying jump | s: duck | space: fire | q your mom!', 
                     '20px Arial',
@@ -118,6 +120,7 @@
                     });
                 }
                 
+                // TODO: 1 - add a head's up display
             })();
         </script>
     </body>

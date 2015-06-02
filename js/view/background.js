@@ -8,6 +8,13 @@
      * Create a background view for our game application
      */
     window.opspark.makeBackground = function(app,ground) {
+        if(!app) {
+            throw new Error("Invaid app argument");
+        }
+        if(!ground || typeof(ground.y) == 'undefined') {
+            throw new Error("Invalid ground argument");
+        }
+
         // container which will be returned
         var background;
         
@@ -21,6 +28,10 @@
 
             background.removeAllChildren();
 
+            // TODO: 3 - YOUR DRAW CODE GOES HERE
+            // XXX: not quite right
+            var backgroundFill = draw.rect(canvasWidth,canvasHeight,'yellow');
+            background.addChild(backgroundFill);
         }
         
         // Perform background animation
