@@ -90,10 +90,10 @@ Our first goal is to create a great background for our game. That will require d
 
 In order to draw something you will create a *shape* using one of the following functions:
 
-    shape = rect(width, height, color, strokeColor, strokeStyle, xOffset, yOffset);
-    shape = line(fromX, fromY, toX, toY, strokeColor, strokeStyle);
-    shape = circle(radius, color, strokeColor, strokeStyle, xOffset, yOffset);
-    shape = polyStar(radius, sides, pointSize, angle, color, strokeColor, strokeStyle, xOffset, yOffset);
+    shape = draw.rect(width, height, color, strokeColor, strokeStyle, xOffset, yOffset);
+    shape = draw.line(fromX, fromY, toX, toY, strokeColor, strokeStyle);
+    shape = draw.circle(radius, color, strokeColor, strokeStyle, xOffset, yOffset);
+    shape = draw.polyStar(radius, sides, pointSize, angle, color, strokeColor, strokeStyle, xOffset, yOffset);
 
 and then you can add a shape to the background by calling:
 
