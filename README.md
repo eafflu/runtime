@@ -51,21 +51,27 @@ What are the *game mechanics*? What are the goals and what are the challenges? W
 
 Finally, come up with a good *name* for your game. Having a great name for a project is an important step, but don't worry, you can always change it later. 
 
-# Step 3 - HUD
+# Step 3 - Adding The Heads-Up Display
 
-Most games display *status information* like the current score or number of lives remaining overlayed with the running game at either the top or bottom of the screen. We call this a "Heads Up Display" and we've already written one for you in `src/view/hud.js`
+Most games display *status information* like the current score or number of lives remaining overlayed with the running game at either the top or bottom of the screen. We call this a "Heads-Up Display" and we've already written one for you in `js/view/hud.js`
 
-To include it you will want to add the following script to `index.html` in the `<head>` element
+To include it you will want to add the following script to `index.html` in the `<head>` element underneat the commment that says `<!-- add any additional scripts here -->` 
 
     <script src="js/view/hud.js"></script>
 
-Find this file in your project and open it. You should see that it declares a function and assigns it to `window.opspark.makeHud`. Read the documentation in the comments to see what it does, then add the example code provided to `index.html` at `TODO: 1`. Once that is done, you should see the heads-up display!
+Find this file in your project and open it. You should see that it declares a function and assigns it to `window.opspark.makeHud`. Read the documentation for `makeHud` and following its instructions for adding the heads-up-display to the game. You will want to make a change to the code in `index.html` at `TODO: 1`. Once that is done, you should see the heads-up display!
 
-Now, add one more line of code
+![Heads-Up Display](http://i.imgur.com/VG1KvnA.png)
+
+Now, add one more line of code to `index.html` where you created your heads-up display.
 
     window.hud = hud;
 
-By assigning the `hud` variable to a property on the `window` object, we can play with it in the console. Open up the console in Chrome Developer Tools and type each of these code statements. What do they do?
+By assigning the `hud` variable to a property on the `window` object, we can play with it in the console. 
+
+![hud variable in console](http://i.imgur.com/nxwu637.png)
+
+Open up the console in Chrome Developer Tools and type each of these code statements. 
 
     hud.updateScore(10);
 
@@ -75,62 +81,103 @@ By assigning the `hud` variable to a property on the `window` object, we can pla
 
     hud.setIntegrity(100);
 
-    hud.kill()
+    hud.kill();
 
-# Step 4 - Creating A Background
+**What do they do?**
 
-Include the script `src/view/background.js` in the same way you included `hud.js`. Find the script that is included and determine what function you need to call in order to create the background. Modify `index.html` at `TODO: 2` to call that function. You will need to supply the appropriate arguments to the function. 
+# Step 4 - Adding A Background 
 
-    var background = // ????
-    view.addChild(background);
+Include the script `js/view/background.js` by adding the following code to the `<head>` element of `index.html`
+
+    <script src="js/view/background.js"></script>
+
+Modify `index.html` at `TODO: 2` to call our newly included code. You will need to supply the appropriate arguments to the function. 
+
+```js
+var background = opspark.makeBackground(app,ground);
+view.addChild(background);
+```
 
 Once this is done correctly you should see Halle on a yellow background. 
 
+![Halle On Yellow Background](http://i.imgur.com/iqo5v3F.png)
+
 Our first goal is to create a great background for our game. That will require drawing. 
+
+# Drawing With Create.js
 
 In order to draw something you will create a *shape* using one of the following functions:
 
-    shape = draw.rect(width, height, color, strokeColor, strokeStyle, xOffset, yOffset);
-    shape = draw.line(fromX, fromY, toX, toY, strokeColor, strokeStyle);
-    shape = draw.circle(radius, color, strokeColor, strokeStyle, xOffset, yOffset);
-    shape = draw.polyStar(radius, sides, pointSize, angle, color, strokeColor, strokeStyle, xOffset, yOffset);
+Image | Code
+------|------
+![rect](http://i.imgur.com/gwbZLZl.png)    | `shape = draw.rect(width, height, color, strokeColor, strokeStyle);`
+![line](http://i.imgur.com/Zy8nY0C.png)   | `shape = draw.line(fromX, fromY, toX, toY, strokeColor, strokeStyle);`
+![circle](http://i.imgur.com/Zc9hJqU.png)    | `shape = draw.circle(radius, color, strokeColor, strokeStyle);`
+![image](http://i.imgur.com/BGZCnX8.png) `href='img/moon.png'`    | `shape = draw.bitmap(href);`
 
-and then you can add a shape to the background by calling:
+In order to make that shape show on sreen you will need to add that shape to the `background` by calling
 
-     background.addChild(shape);
+    background.addChild(shape);
 
-This code should go at `TODO: 3` in `js/view/background.js` within the `render()` function. 
+Your shape is created with an origin at `(0,0)` in your games coordinate system, but you can say where a shape will show up on the screen by setting it's `x` and `y` properties.
+    
+    shape.x = 100;
+    shape.y = 45;
 
 See the [opspark-draw documentation](https://libraries.io/bower/opspark-draw) for more details on drawing functions you can use or look at the source directly in your project at `bower_components/opspark-draw/draw.js`. You can also use anything in the [create.js API](http://www.createjs.com/docs/easeljs/modules/EaselJS.html).
 
-With just these simple functions and your current javascript knowledge, you can create almost anything.  
+# Step 5 - Create Your Own Background
 
-Start by adjusting the background to a color you like and then fix the code so that it only shows the background color above the the ground. Then, draw something new to your background.
+Create a great background for your game. With the draw functions provided and your javascript knowledge, you can create almost anything.
 
-One place to start is to use a [for loop](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for) to draw a bunch of objects to the screen. Start with this:
+All drawing code for the background should go at `TODO: 3` in `js/view/background.js` within the `render()` function. 
+
+Start by adjusting the background to a color you like and then fix the code so that it only shows the background color above the the ground. 
+
+As a last step, depending on the background you've built, your heads-up-display may be hard to see or just plain ugly. Modify the colors used by `src/view/hud.js` to match your background.
+
+If you need some inspiration, here are some things to try:
+
+# Star Field
+
+![Star Field](http://i.imgur.com/Vsdw99h.png)
+
+One place to start is to use a [for loop](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for) to draw a bunch of objects to the screen. 
+
+Start with this:
 
 ```js
-var circle;
 for(var i=0;i<100;i++) {
-    circle = draw.circle(10,'purple','black',1);
+    circle = draw.circle(10,'white','LightGray',2);
     circle.x = canvasWidth*Math.random();
     circle.y = canvasHeight*Math.random();
     background.addChild(circle);
 }
 ```
 
-You can also include images using `draw.bitmap()`
+Try changing the code to make the result look more like actual stars.
+
+# Moon
+
+![Moon](http://i.imgur.com/ntD7AfF.png)
+
+You can add images to your background using `draw.bitmap()`
 
 ```
-var moon = draw.bitmap('img/moon.png',100,125);
+var moon = draw.bitmap('img/moon.png');
+moon.x = 300;
+moon.y = 25;
+moon.scaleX = 1.0;
+moon.scaleY = 1.0;
 background.addChild(moon);
 ```
 
-Now see what you can make!
+Try moving the moon to a good location for your game.
 
-Finally, depending on the background you've built, your heads-up-display may be hard to see or just plain ugly. Modify the colors used by `src/view/hud.js` to match your background.
+Try changing the size of the moon by changing the moon's `scaleX` and `scaleY` properties
 
-# Step 5 - Animation and Parallax
+
+# Step 6 - Animation and Parallax
 
 Parallax is a technique in animation for giving the illusion of depth. When you are moving, things that are close to you move quickly whereas things that are very far away may move slowly or not appear to move at all. We can use this technique in our game to create visually interesting backgrounds. 
 
