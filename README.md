@@ -59,7 +59,7 @@ To include it you will want to add the following script to `index.html` in the `
 
     <script src="js/view/hud.js"></script>
 
-Find this file in your project and open it. You should see that it declares a function and assigns it to `window.opspark.makeHud`. Read the documentation for `makeHud` and following its instructions for adding the heads-up-display to the game. You will want to make a change to the code in `index.html` at `TODO: 1`. Once that is done, you should see the heads-up display!
+Find this file in your project and open it. You should see that it declares a function and assigns it to `window.opspark.makeHud`. Read the documentation for `makeHud` and follow it's instructions for adding the heads-up-display to the game. You will want to make a change to the code in `index.html` at `TODO: 1`. Once that is done, you should see the heads-up display!
 
 ![Heads-Up Display](http://i.imgur.com/VG1KvnA.png)
 
@@ -71,7 +71,7 @@ By assigning the `hud` variable to a property on the `window` object, we can pla
 
 ![hud variable in console](http://i.imgur.com/nxwu637.png)
 
-Open up the console in Chrome Developer Tools and type each of these code statements. 
+Open up the console in Chrome Developer Tools and type out each of these statements.
 
     hud.updateScore(10);
 
@@ -102,7 +102,7 @@ Once this is done correctly you should see Halle on a yellow background.
 
 ![Halle On Yellow Background](http://i.imgur.com/iqo5v3F.png)
 
-Our first goal is to create a great background for our game. That will require drawing. 
+Our first goal is to create a great background for our game. That will require learning to draw with create.js.
 
 # Drawing With Create.js
 
@@ -119,7 +119,7 @@ In order to make that shape show on sreen you will need to add that shape to the
 
     background.addChild(shape);
 
-Your shape is created with an origin at `(0,0)` in your games coordinate system, but you can say where a shape will show up on the screen by setting it's `x` and `y` properties.
+Your shape will be created so that it appears at the upper-left hand corner of the screen, at `(0,0)` in your game's coordinate system, but you can place a shape anywhere on the screen by setting it's `x` and `y` properties.
     
     shape.x = 100;
     shape.y = 45;
@@ -128,11 +128,11 @@ Remember that `x` and `y` refer to a coordinate system which has an origin (0,0)
 
 ![cartesion coordinate system](http://i.imgur.com/jyZuFer.png)
 
-We've defined a couple of variables that should help you.
+We've defined a couple of variables that should help you draw shapes in the right place.
 
-`canvasWidth` is the total width of the game screen
-`canvasHeight` is the total height of the game screen
-`groundY` is the y coordinate of the ground line
+`canvasWidth` is the total width of the game screen  
+`canvasHeight` is the total height of the game screen  
+`groundY` is the y coordinate of the ground line  
 
 See the [opspark-draw documentation](https://libraries.io/bower/opspark-draw) for more details on drawing functions you can use or look at the source directly in your project at `bower_components/opspark-draw/draw.js`. You can also use anything in the [create.js API](http://www.createjs.com/docs/easeljs/modules/EaselJS.html).
 
@@ -152,9 +152,10 @@ If you need some inspiration, here are some things to try:
 
 ![Star Field](http://i.imgur.com/Vsdw99h.png)
 
-One place to start is to use a [for loop](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for) to draw a bunch of objects to the screen. 
+Use a [for loop](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for) to draw a bunch of objects to the screen. 
 
 ```js
+var circle;
 for(var i=0;i<100;i++) {
     circle = draw.circle(10,'white','LightGray',2);
     circle.x = canvasWidth*Math.random();
@@ -272,6 +273,6 @@ Make sure you understand what each line of this code does. Change how the buildi
 
 ![Halle With Buildings With Background](http://i.imgur.com/kyeRy7x.png)
 
-Now, write code in `update()` that animates the boxes so that they move towards Halle. Use the technique we applied to to `backgroundBox` to make the buildings wrap around to the other edge of the screen.
+Now, write code in `update()` that animates the boxes so that they move towards Halle. Use the technique we applied to `backgroundBox` to make the buildings continually appear in the game as Halle walks. 
 
 
