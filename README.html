@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+</head>
+<body>
+<h1 id="runtime">Runtime!</h1>
+
+<p>Meet Halle, the official Operation Spark robot.</p>
+
+<figure>
+<img src="http://i.imgur.com/yUKA9EN.gif" alt="Halle" />
+<figcaption>Halle</figcaption>
+</figure>
+
+<p>Halle has some cool moves but nobody to play with. Let&#8217;s build our own game using Halle!</p>
+
+<h1 id="step1-gettingstarted">Step 1 - Getting Started</h1>
+
+<p>Install this project into your Cloud9 workspace by typing <code>opspark install</code> into a terminal and choosing the <code>runtime</code> project.</p>
+
+<p>You can run the game by opening <code>index.html</code> and then choosing <em>Preview</em>. You should see Halle running on a blank background and you should be able to press the appropriate keys to make her jump and shoot. </p>
+
+<p>Now go back and look at the <code>index.html</code> file in Cloud9. <code>index.html</code> is an example of the kind of code you might see in a real-world project. The majority of the code is not in <code>index.html</code> itself but is loaded as external scripts. </p>
+
+<pre><code>&lt;script src=&quot;js/util/load.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;js/util/spin.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;js/util/point.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;js/spritesheet.js&quot;&gt;&lt;/script&gt;
+...
+&lt;script src=&quot;js/view/ground.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;js/player/halle.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;js/player/playerManager.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;js/opspark.js&quot;&gt;&lt;/script&gt;
+</code></pre>
+
+<p>The scripts are organized so that each script handles one aspect of the game, with each name describing what they do. Professional developers break code into scripts or modules so that the code is easier to understand and so that many people can work on the code at the same time.</p>
+
+<p>Some of the scripts are <em>library</em> or <em>third-party</em> code. This is code that other people wrote that we can use to do cool stuff.</p>
+
+<pre><code class="html">&lt;script src=&quot;bower_components/easeljs/lib/easeljs-0.8.1.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;bower_components/PreloadJS/lib/preloadjs-0.6.1.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;bower_components/TweenJS/lib/tweenjs-0.6.1.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;bower_components/SoundJS/lib/soundjs-0.6.1.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;bower_components/opspark-draw/draw.js&quot;&gt;&lt;/script&gt;
+</code></pre>
+
+<p>For this project, we will be using the <a href="http://createjs.com/">create.js</a> library to draw and animate our game. </p>
+
+<h1 id="step2-brainstorming">Step 2 - Brainstorming</h1>
+
+<p>Before we start coding, we have to decide what kind of game we want to build with Halle. Look at the kind of moves that Halle can make and imagine how they would fit into <strong>your</strong> game. </p>
+
+<p>You will need to decide on a general <em>theme</em> for the game. What kind of world is Halle in? Is she in space, in a factory, on the streets of New Orleans? </p>
+
+<p>What are the <em>game mechanics</em>? What are the goals and what are the challenges? What might halle encounter as the game progresses? Are there points or a score? How does the game end? </p>
+
+<p>Finally, come up with a good <em>name</em> for your game. Having a great name for a project is an important step, but don&#8217;t worry, you can always change it later. </p>
+
+<h1 id="step3-addingtheheads-updisplay">Step 3 - Adding The Heads-Up Display</h1>
+
+<p>Most games display <em>status information</em> like the current score or number of lives remaining overlayed with the running game at either the top or bottom of the screen. We call this a &#8220;Heads-Up Display&#8221; and we&#8217;ve already written one for you in <code>js/view/hud.js</code></p>
+
+<p>To include it you will want to add the following script to <code>index.html</code> in the <code>&lt;head&gt;</code> element underneat the commment that says <code>&lt;!-- add any additional scripts here --&gt;</code> </p>
+
+<pre><code>&lt;script src=&quot;js/view/hud.js&quot;&gt;&lt;/script&gt;
+</code></pre>
+
+<p>Find this file in your project and open it. You should see that it declares a function and assigns it to <code>window.opspark.makeHud</code>. Read the documentation for <code>makeHud</code> and following its instructions for adding the heads-up-display to the game. You will want to make a change to the code in <code>index.html</code> at <code>TODO: 1</code>. Once that is done, you should see the heads-up display!</p>
+
+<figure>
+<img src="http://i.imgur.com/VG1KvnA.png" alt="Heads-Up Display" />
+<figcaption>Heads-Up Display</figcaption>
+</figure>
+
+<p>Now, add one more line of code to <code>index.html</code> where you created your heads-up display.</p>
+
+<pre><code>window.hud = hud;
+</code></pre>
+
+<p>By assigning the <code>hud</code> variable to a property on the <code>window</code> object, we can play with it in the console. </p>
+
+<figure>
+<img src="http://i.imgur.com/nxwu637.png" alt="hud variable in console" />
+<figcaption>hud variable in console</figcaption>
+</figure>
+
+<p>Open up the console in Chrome Developer Tools and type each of these code statements. </p>
+
+<pre><code>hud.updateScore(10);
+
+hud.updateOf(1000);
+
+hud.setIntegrity(25);
+
+hud.setIntegrity(100);
+
+hud.kill();
+</code></pre>
+
+<p><strong>What do they do?</strong></p>
+
+<h1 id="step4-addingabackground">Step 4 - Adding A Background</h1>
+
+<p>Include the script <code>js/view/background.js</code> by adding the following code to the <code>&lt;head&gt;</code> element of <code>index.html</code></p>
+
+<pre><code>&lt;script src=&quot;js/view/background.js&quot;&gt;&lt;/script&gt;
+</code></pre>
+
+<p>Modify <code>index.html</code> at <code>TODO: 2</code> to call our newly included code. You will need to supply the appropriate arguments to the function. </p>
+
+<pre><code class="js">var background = opspark.makeBackground(app,ground);
+view.addChild(background);
+</code></pre>
+
+<p>Once this is done correctly you should see Halle on a yellow background. </p>
+
+<figure>
+<img src="http://i.imgur.com/iqo5v3F.png" alt="Halle On Yellow Background" />
+<figcaption>Halle On Yellow Background</figcaption>
+</figure>
+
+<p>Our first goal is to create a great background for our game. That will require drawing. </p>
+
+<h1 id="drawingwithcreate.js">Drawing With Create.js</h1>
+
+<p>In order to draw something you will create a <em>shape</em> using one of the following functions:</p>
+
+<table>
+<colgroup>
+<col style="text-align:left;"/>
+<col style="text-align:left;"/>
+</colgroup>
+
+<thead>
+<tr>
+	<th style="text-align:left;">Image</th>
+	<th style="text-align:left;">Code</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+	<td style="text-align:left;"><img src="http://i.imgur.com/gwbZLZl.png" alt="rect" /></td>
+	<td style="text-align:left;"><code>shape = draw.rect(width, height, color, strokeColor, strokeWidth);</code></td>
+</tr>
+<tr>
+	<td style="text-align:left;"><img src="http://i.imgur.com/Zy8nY0C.png" alt="line" /></td>
+	<td style="text-align:left;"><code>shape = draw.line(fromX, fromY, toX, toY, strokeColor, strokeWidth);</code></td>
+</tr>
+<tr>
+	<td style="text-align:left;"><img src="http://i.imgur.com/Zc9hJqU.png" alt="circle" /></td>
+	<td style="text-align:left;"><code>shape = draw.circle(radius, color, strokeColor, strokeWidth);</code></td>
+</tr>
+<tr>
+	<td style="text-align:left;"><img src="http://i.imgur.com/BGZCnX8.png" alt="image" /> <code>href='img/moon.png'</code></td>
+	<td style="text-align:left;"><code>shape = draw.bitmap(href);</code></td>
+</tr>
+</tbody>
+</table>
+
+<p>In order to make that shape show on sreen you will need to add that shape to the <code>background</code> by calling</p>
+
+<pre><code>background.addChild(shape);
+</code></pre>
+
+<p>Your shape is created with an origin at <code>(0,0)</code> in your games coordinate system, but you can say where a shape will show up on the screen by setting it&#8217;s <code>x</code> and <code>y</code> properties.</p>
+
+<pre><code>shape.x = 100;
+shape.y = 45;
+</code></pre>
+
+<p>See the <a href="https://libraries.io/bower/opspark-draw">opspark-draw documentation</a> for more details on drawing functions you can use or look at the source directly in your project at <code>bower_components/opspark-draw/draw.js</code>. You can also use anything in the <a href="http://www.createjs.com/docs/easeljs/modules/EaselJS.html">create.js API</a>.</p>
+
+<h1 id="step5-createyourownbackground">Step 5 - Create Your Own Background</h1>
+
+<p>Create a great background for your game. With the draw functions provided and your javascript knowledge, you can create almost anything.</p>
+
+<p>All drawing code for the background should go at <code>TODO: 3</code> in <code>js/view/background.js</code> within the <code>render()</code> function. </p>
+
+<p>Start by adjusting the background to a color you like and then fix the code so that it only shows the background color above the the ground. </p>
+
+<p>As a last step, depending on the background you&#8217;ve built, your heads-up-display may be hard to see or just plain ugly. Modify the colors used by <code>src/view/hud.js</code> to match your background.</p>
+
+<p>If you need some inspiration, here are some things to try:</p>
+
+<h1 id="starfield">Star Field</h1>
+
+<figure>
+<img src="http://i.imgur.com/Vsdw99h.png" alt="Star Field" />
+<figcaption>Star Field</figcaption>
+</figure>
+
+<p>One place to start is to use a <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for">for loop</a> to draw a bunch of objects to the screen. </p>
+
+<pre><code class="js">for(var i=0;i&lt;100;i++) {
+    circle = draw.circle(10,'white','LightGray',2);
+    circle.x = canvasWidth*Math.random();
+    circle.y = canvasHeight*Math.random();
+    background.addChild(circle);
+}
+</code></pre>
+
+<p>Try changing the code to make the result look more like actual stars.</p>
+
+<h1 id="moon">Moon</h1>
+
+<figure>
+<img src="http://i.imgur.com/ntD7AfF.png" alt="Moon" />
+<figcaption>Moon</figcaption>
+</figure>
+
+<p>You can add images to your background using <code>draw.bitmap()</code></p>
+
+<pre><code>var moon = draw.bitmap('img/moon.png');
+moon.x = 300;
+moon.y = 25;
+moon.scaleX = 1.0;
+moon.scaleY = 1.0;
+background.addChild(moon);
+</code></pre>
+
+<p>Try moving the moon to a good location for your game.</p>
+
+<p>Try changing the size of the moon by changing the moon&#8217;s <code>scaleX</code> and <code>scaleY</code> properties</p>
+
+<h1 id="animation">Animation</h1>
+
+<p>create.js allows us to perform animation in our game. If you look in the upper left-hand corner of the game, you will see something like &#8220;57 fps&#8221;. That means the game is running at 57 frames-per-second. Each &#8220;frame&#8221; is one drawing of our game and so we are redrawing the game 57 times every second. By making slight changes to what we draw over time we can give the illusion of motion. </p>
+
+<p>We don&#8217;t have to completely re-create our game 57 times a second. Instead, we can setup a scene and then make slight modifications to it over time. In <code>background.js</code>, the <code>render()</code> function sets up our scene and the <code>update()</code> function is called once per frame. Whatever changes we make to the scene are drawn on the next frame. </p>
+
+<h1 id="step6-createabox">Step 6 - Create a box</h1>
+
+<p>To illustrate this, let&#8217;s draw a box on the screen. We will call it <code>backgroundBox</code>. In <code>background.js</code>, declare a variable <code>backgroundBox</code> directly after the <code>background</code> variable declaration.</p>
+
+<pre><code>var backgroundBox;
+</code></pre>
+
+<p>Then in the <code>render()</code> function, store a rectangle in <code>backgroundBox</code> and add it to the background</p>
+
+<pre><code class="js">backgroundBox = draw.rect(100,100,'Blue');
+backgroundBox.x = 0;
+backgroundBox.y = 0;
+background.addChild(backgroundBox);
+</code></pre>
+
+<p>You should now see a blue box in your background. Change the values of <code>backgroundBox.x</code> and <code>backgroundBox.y</code> so that the box appears on the ground in front of Halle.</p>
+
+<figure>
+<img src="http://i.imgur.com/hDCmj47.png" alt="Halle and Blue Box" />
+<figcaption>Halle and Blue Box</figcaption>
+</figure>
+
+<h1 id="step7-animatingthebox">Step 7 - Animating The Box</h1>
+
+<p>We can perform animation by making changes to our scene in the <code>update()</code> function. Remember that it is called once for each frame of the game.</p>
+
+<p>In the <code>update()</code> function, add the following code:</p>
+
+<pre><code>backgroundBox.x = backgroundBox.x + 1;
+</code></pre>
+
+<p>You should now see the box moving. What happened? Why is it doing that? Make sure you understand and make sure your partner (if you are pairing) understands as well. </p>
+
+<p><strong>Change the code so that the box moves towards Halle</strong></p>
+
+<h1 id="parallax">Parallax</h1>
+
+<figure>
+<img src="http://www.hallme.com/uploads/parallax-scrolling-mario.gif" alt="Parallax" />
+<figcaption>Parallax</figcaption>
+</figure>
+
+<p>Parallax is a technique in animation for giving the illusion of depth. When you are moving, things that are close to you move quickly whereas things that are very far away may move slowly or not appear to move at all. We can use this technique in our game to create visually interesting backgrounds. </p>
+
+<h1 id="step8-creatingaparallaxeffect">Step 8 - Creating a Parallax Effect</h1>
+
+<p>Try adding the following code to <code>update()</code></p>
+
+<pre><code class="js">if(backgroundBox.x &lt; -100) {
+    backgroundBox.x = canvasWidth;
+}
+</code></pre>
+
+<p>What is going on here?</p>
+
+<p>We can take this technique one step further by applying it to <em>many</em> boxes. </p>
+
+<p>Go ahead and remove your <code>backgroundBox</code> from the screen by commenting out this line of code</p>
+
+<pre><code>// background.addChild(backgroundBox);
+</code></pre>
+
+<p>After the declaration of <code>backgroundBox</code> declare a variable <code>buildings</code> and assign it an empty array.</p>
+
+<pre><code>var buildings = [];
+</code></pre>
+
+<p>In <code>render()</code> create several boxes using a <code>for</code> loop and add them to <code>buildings</code> array. </p>
+
+<pre><code class="js">var buildingHeight = 300;
+var building;
+for(var i=0;i&lt;5;++i) {
+    building = draw.rect(75,buildingHeight,'LightGray','Black',1);
+    building.x = 200*i;
+    building.y = groundY-buildingHeight;
+    background.addChild(building);
+    buildings.push(building);
+}
+</code></pre>
+
+<p>You should see this:</p>
+
+<figure>
+<img src="http://i.imgur.com/LSKBOsR.png" alt="Halle With Buildings" />
+<figcaption>Halle With Buildings</figcaption>
+</figure>
+
+<p>Make sure you understand what each line of this code does. Change how the building appear. Can you make them have different heights? Different colors?</p>
+
+<figure>
+<img src="http://i.imgur.com/kyeRy7x.png" alt="Halle With Buildings With Background" />
+<figcaption>Halle With Buildings With Background</figcaption>
+</figure>
+
+<p>Now, write code in <code>update()</code> that animates the boxes so that they move towards Halle. Use the technique we applied to to <code>backgroundBox</code> to make the buildings wrap around to the other edge of the screen.</p>
+
+</body>
+</html>
