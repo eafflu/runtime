@@ -110,9 +110,9 @@ In order to draw something you will create a *shape* using one of the following 
 
 Image | Code
 ------|------
-![rect](http://i.imgur.com/gwbZLZl.png)    | `shape = draw.rect(width, height, color, strokeColor, strokeStyle);`
-![line](http://i.imgur.com/Zy8nY0C.png)   | `shape = draw.line(fromX, fromY, toX, toY, strokeColor, strokeStyle);`
-![circle](http://i.imgur.com/Zc9hJqU.png)    | `shape = draw.circle(radius, color, strokeColor, strokeStyle);`
+![rect](http://i.imgur.com/gwbZLZl.png)    | `shape = draw.rect(width, height, color, strokeColor, strokeWidth);`
+![line](http://i.imgur.com/Zy8nY0C.png)   | `shape = draw.line(fromX, fromY, toX, toY, strokeColor, strokeWidth);`
+![circle](http://i.imgur.com/Zc9hJqU.png)    | `shape = draw.circle(radius, color, strokeColor, strokeWidth);`
 ![image](http://i.imgur.com/BGZCnX8.png) `href='img/moon.png'`    | `shape = draw.bitmap(href);`
 
 In order to make that shape show on sreen you will need to add that shape to the `background` by calling
@@ -143,8 +143,6 @@ If you need some inspiration, here are some things to try:
 ![Star Field](http://i.imgur.com/Vsdw99h.png)
 
 One place to start is to use a [for loop](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for) to draw a bunch of objects to the screen. 
-
-Start with this:
 
 ```js
 for(var i=0;i<100;i++) {
@@ -177,41 +175,93 @@ Try moving the moon to a good location for your game.
 Try changing the size of the moon by changing the moon's `scaleX` and `scaleY` properties
 
 
-# Step 6 - Animation and Parallax
+# Animation
 
-Parallax is a technique in animation for giving the illusion of depth. When you are moving, things that are close to you move quickly whereas things that are very far away may move slowly or not appear to move at all. We can use this technique in our game to create visually interesting backgrounds. 
+create.js allows us to perform animation in our game. If you look in the upper left-hand corner of the game, you will see something like "57 fps". That means the game is running at 57 frames-per-second. Each "frame" is one drawing of our game and so we are redrawing the game 57 times every second. By making slight changes to what we draw over time we can give the illusion of motion. 
 
-To illustrate this, let's draw a box on the screen. We will call it `backgroundBox`.
+We don't have to completely re-create our game 57 times a second. Instead, we can setup a scene and then make slight modifications to it over time. In `background.js`, the `render()` function sets up our scene and the `update()` function is called once per frame. Whatever changes we make to the scene are drawn on the next frame. 
 
-In `background.js`, declare a variable `backgroundBox` directly after the `background` variable declaration.
+# Step 6 - Create a box
 
-Then in the `render()` function, store a rectangle in `backgroundBox` and add it to 
+To illustrate this, let's draw a box on the screen. We will call it `backgroundBox`. In `background.js`, declare a variable `backgroundBox` directly after the `background` variable declaration.
+
+    var backgroundBox;
+
+Then in the `render()` function, store a rectangle in `backgroundBox` and add it to the background
 
 ```js
-backgroundBox = draw.rect(100,100,'Gray');
-backgroundBox.x = 300;
-backgroundBox.y = 200;
+backgroundBox = draw.rect(100,100,'Blue');
+backgroundBox.x = 0;
+backgroundBox.y = 0;
 background.addChild(backgroundBox);
 ```
 
-You should now see a gray box in your background.
+You should now see a blue box in your background. Change the values of `backgroundBox.x` and `backgroundBox.y` so that the box appears on the ground in front of Halle.
 
-Now we are going to animate our box. The `update()` function is called once for every frame of our game. In the update() function you can change the position of our box by changing the `x` and `y` properties of the object.
+![Halle and Blue Box](http://i.imgur.com/hDCmj47.png)
+
+# Step 7 - Animating The Box
+
+We can perform animation by making changes to our scene in the `update()` function. Remember that it is called once for each frame of the game.
 
 In the `update()` function, add the following code:
 
-    backgroundBox.x = backgroundBox.x - 1;
+    backgroundBox.x = backgroundBox.x + 1;
 
-What happened? Why is it doing that? Make sure you understand and make sure your partner (if you are pairing) understands as well. 
+You should now see the box moving. What happened? Why is it doing that? Make sure you understand and make sure your partner (if you are pairing) understands as well. 
 
-Now try adding the following code to `update()`
+**Change the code so that the box moves towards Halle**
+
+# Parallax
+
+![Parallax](http://www.hallme.com/uploads/parallax-scrolling-mario.gif)
+
+Parallax is a technique in animation for giving the illusion of depth. When you are moving, things that are close to you move quickly whereas things that are very far away may move slowly or not appear to move at all. We can use this technique in our game to create visually interesting backgrounds. 
+
+# Step 8 - Creating a Parallax Effect
+
+Try adding the following code to `update()`
 
 ```js
-if(backgroundBox.x < -backgroundBox.getBounds().width) {
+if(backgroundBox.x < -100) {
     backgroundBox.x = canvasWidth;
 }
 ```
 
 What is going on here?
 
-Try using this technique to create a background with objects that move at different speeds. 
+We can take this technique one step further by applying it to *many* boxes. 
+
+Go ahead and remove your `backgroundBox` from the screen by commenting out this line of code
+
+    // background.addChild(backgroundBox);
+
+After the declaration of `backgroundBox` declare a variable `buildings` and assign it an empty array.
+
+    var buildings = [];
+
+In `render()` create several boxes using a `for` loop and add them to `buildings` array. 
+
+```js
+var buildingHeight = 300;
+var building;
+for(var i=0;i<5;++i) {
+    building = draw.rect(75,buildingHeight,'LightGray','Black',1);
+    building.x = 200*i;
+    building.y = groundY-buildingHeight;
+    background.addChild(building);
+    buildings.push(building);
+}
+```
+
+You should see this:
+
+![Halle With Buildings](http://i.imgur.com/LSKBOsR.png)
+
+Make sure you understand what each line of this code does. Change how the building appear. Can you make them have different heights? Different colors?
+
+![Halle With Buildings With Background](http://i.imgur.com/kyeRy7x.png)
+
+Now, write code in `update()` that animates the boxes so that they move towards Halle. Use the technique we applied to to `backgroundBox` to make the buildings wrap around to the other edge of the screen.
+
+
