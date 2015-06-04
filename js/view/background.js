@@ -30,7 +30,9 @@
             background.removeAllChildren();
 
             // TODO: 3 - YOUR DRAW CODE GOES HERE
-            // XXX: not quite right
+
+            // this fills the background with a obnoxious yellow
+            // you should modify this to suit your game
             var backgroundFill = draw.rect(canvasWidth,canvasHeight,'yellow');
             background.addChild(backgroundFill);
         }
