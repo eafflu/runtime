@@ -124,6 +124,16 @@ Your shape is created with an origin at `(0,0)` in your games coordinate system,
     shape.x = 100;
     shape.y = 45;
 
+Remember that `x` and `y` refer to a coordinate system which has an origin (0,0) in the upper-left hand corner. `x` becomes larger as you move to the right. `y` becomes larger as you move downward.
+
+![cartesion coordinate system](http://i.imgur.com/jyZuFer.png)
+
+We've defined a couple of variables that should help you.
+
+`canvasWidth` is the total width of the game screen
+`canvasHeight` is the total height of the game screen
+`groundY` is the y coordinate of the ground line
+
 See the [opspark-draw documentation](https://libraries.io/bower/opspark-draw) for more details on drawing functions you can use or look at the source directly in your project at `bower_components/opspark-draw/draw.js`. You can also use anything in the [create.js API](http://www.createjs.com/docs/easeljs/modules/EaselJS.html).
 
 # Step 5 - Create Your Own Background
