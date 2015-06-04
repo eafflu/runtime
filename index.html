@@ -38,8 +38,6 @@
         <script src="js/opspark.js"></script>
 
        <!-- add any additional scripts here -->
-        <script src="js/view/starfield.js"></script>
-        <script src="js/view/hud.js"></script>
 
         <style type="text/css">
             /*override default styles here*/
@@ -80,8 +78,6 @@
                 ground = opspark.makeGround(app);
 
                 // TODO: 2
-                var background = opspark.makeBackground(app,ground);
-                view.addChild(background);
                 
                 var help = draw.textfield('MOVES || w: jump | e: flying jump | s: duck | space: fire | q your mom!', 
                     '20px Arial',
@@ -125,9 +121,6 @@
                 }
                 
                 // TODO: 1 - add a head's up display
-                var hud = opspark.makeHud();
-                view.addChild(hud);
-                window.hud = hud;
             })();
         </script>
     </body>
