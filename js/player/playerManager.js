@@ -117,7 +117,7 @@
     
     function hitTest(body) {
         _player.hitzones().forEach(function(hitzone) {
-            var distanceProperties = physikz.getDistanceProperties(_player.localToGlobal(hitzone.x, hitzone.y), body);
+            var distanceProperties = physikz.getDistanceProperties(hitzone.localToGlobal(0,0), body);
             var hitResult = physikz.hitTestRadial(distanceProperties.distance, hitzone, body);
             if (hitResult.isHit) {
                 handleCollision(distanceProperties, hitResult, physikz.getImpactProperties(hitzone, body));
