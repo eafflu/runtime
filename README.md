@@ -275,4 +275,75 @@ Make sure you understand what each line of this code does. Change how the buildi
 
 Now, write code in `update()` that animates the boxes so that they move towards Halle. Use the technique we applied to `backgroundBox` to make the buildings continually appear in the game as Halle walks. 
 
+# Step 9 - Setting Up Gameplay
+
+You've created a rad background and are now ready to move on to gameplay. You'll be coding up and designing some game elements which Halle can interact with. The game manager provides an API for creating objects which move around the screen and can be run into, jumped over, or shot with Halle's gun. 
+
+To create a new game manager, add the following code to `index.html` after `TODO: 3` 
+    
+    var game = opspark.createGameManager(app,hud);
+
+The "level" file is where we are going to define all of our gameplay for our game. Add the following script to `index.html` in the `<head>` element underneath the commment that says `<!-- add any additional scripts here -->` 
+
+```html
+<script src="js/level01.js"></script>
+```
+
+And then add the following code to `index.html` following the creation of the game manager
+
+    opspark.runLevelInGame(game);
+
+Open up `js/level01.js` file in your editor. You should see this:
+
+TK: image
+
+This file is where we are going to be writing our code for the next couple of steps.
+
+# Step 10 - Creating your first obstacle
+
+An obstacle is the simplest element in our game. It moves at a fixed speed toward Halle as the game progresses. The obstacle must be avoided by either jumping or ducking and cannot be destroyed by being shot with Halle's gun. If the obstacle collides with Halle, Halle takes damage. If Halle takes enough damage, she dies and the game is over. 
+
+We will create our first obstacle in `js/level01.js` inside of the `runLevelInGame` function. 
+
+First, declare a variable `myObstacle` and create a new obstacle using the Game Managers `createObstacle()` function. The `createObstacle` function takes two parameters which define the size of the object (`hitZoneSize`) and how much damage the obstacle does when it collides with Halle (`damageFromObstacle`)
+
+    var hitZoneSize = 25;
+    var damageFromObstacle = 10;
+    var myObstacle = game.createObstacle(hitZoneSize,damageFromObstacle);
+
+Then position that obstacle somewhere on screen by modifying the `x` and `y` properties of `myFirstObstacle` 
+
+    myObstacle.x = 400;
+    myObstacle.y = 100;
+
+And finally add it to the game by calling the `addGameItem` function
+    
+    game.addGameItem(myObstacle);    
+
+Once this is done correctly, you should see a gray circle on the screen whice moves towards Halle
+
+TK: image
+
+The circle you see on the screen is the "hit zone" for the obstacle. Once that hit zone collides with Halle, you should see Halle's health indicator decrease by the amount you specified in `damageFromObstacle`. Halle has hitzone's too. Open up `index.html` and find the `debugHalleHitZones` variable and change it to `true` You should now see the circles that make up Halle's hitzone.
+
+Change the `y` property of `myObstacle` so that it eventually collides with Halle
+
+The hitzones in our game are used for collision detection and always present, but when we are playing our game we don't actually show them. Instead of circles we draw something that represents our obstacle. 
+
+Let's make our first obstable be a sawblade. Add the following code:
+
+    var sawbladeBitmap = draw.bitmap('img/sawblade.png');
+    myObstacle.addChild(sawbladeBitmap);
+
+This loads up an image and adds it to our obstacle. You should now see a sawblade on the screen. You should also notice that sawblade doesn't fit within the hitzone. That is because when we `myObstacle.addChild()` the image is placed at the origin of the hitzone. You should adjust the `x` and `y` property of `myObstacle` so that it fits within the hit zone.
+
+    sawbladeBitmap.x = -25;
+    sawbladeBitmap.y = -25;
+
+You can hide your hitzones for now. 
+
+In `index.html` change the `debugHalleHitZones` variable to false.
+
+In `js/level01.js` pass `false` to the method `game.setDebugMode()` 
+
 

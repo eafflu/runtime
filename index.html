@@ -37,6 +37,7 @@
         <script src="js/player/halle.js"></script>
         <script src="js/player/playerManager.js"></script>
         <script src="js/opspark.js"></script>
+        <script src="js/game.js"></script>
 
        <!-- add any additional scripts here -->
 
@@ -75,15 +76,14 @@
                     playerManager, 
                     particleManager;
                 
+                var debugHalleHitZones = true;
+
                 space = app.space;
                 rules = app.rules,
-                //hud = opspark.makeHud();
                 particleManager = opspark.makeParticleManager(app.stage);
-                orbManager = opspark.makeOrbManager(app, particleManager);
-                app.addUpdateable(orbManager);
                 ground = opspark.makeGround(app);
 
-                // TODO: 2
+                // TODO 2 : create hud
                 
                 var help = draw.textfield('MOVES || w: jump | e: flying jump | s: duck | space: fire | q your mom!', 
                     '20px Arial',
@@ -96,7 +96,7 @@
                     .then(function (ss) {
                         spritesheet = ss;
                         
-                        halle = window.opspark.makeHalle(spritesheet, particleManager);
+                        halle = window.opspark.makeHalle(spritesheet, particleManager,debugHalleHitZones);
                         halle.x = halle.getBounds().width * 2;
                         halle.y = ground.y - halle.getBounds().height + 3;
                         app.addUpdateable(halle);
@@ -122,9 +122,10 @@
                     });
                 }
                 
-                // TODO 1 : - add a heads-up display
-                
-                
+                // TODO 1 : add a heads-up display to game
+
+                // TODO 3 : create game manager
+
             })();
         </script>
     </body>

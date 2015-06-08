@@ -30,6 +30,9 @@
                 halle.die();
             }
         }
+
+        hud.setIntegrity(100);
+        hud.updateOf(10000);
         
         function createGameItem(type,radius) {
             var body = _.extend(new createjs.Container(),physikz.makeBody(type));
@@ -40,7 +43,6 @@
                     return;
                 }
                 body.collided = true;
-                console.log("collided with = ",otherBody.type)
                 if(otherBody.type == 'hitzone') {
                     body.onPlayerCollision(body);    
                 }
@@ -48,8 +50,6 @@
                     body.onProjectileCollision(body);    
                 }
             }
-
-            // TODO: body.onVisible
 
             body.onProjectileCollision = function() {
 
@@ -61,25 +61,26 @@
 
             // TODO: require timeout as arguments
             body.fadeOut = function() {
-                var ix = space.indexOf(body);
-                space.splice(ix,1);
-
+                removeFromSpace(body);
                 createjs.Tween.get(body).to({alpha: 0}, 100).call(function() {
-                    view.removeChild(body);
+                    removeGameItem(body);
                 });
             }
 
             // TODO: require timeout as arguments
             body.shrink = function() {
-                var ix = space.indexOf(body);
-                space.splice(ix,1);
-
+                removeFromSpace(body);
                 createjs.Tween.get(body).to({scaleX: 0, scaleY: 0}, 100).call(function() {
-                    view.removeChild(body);
+                    removeGameItem(body);
                 }); 
             }
 
-            // TODO: zoom off screen behavior
+            body.flyTo = function(x,y) {
+                removeFromSpace(body);
+                createjs.Tween.get(body).to({x:x,y:y}, 100).call(function() {
+                    removeGameItem(body);
+                }); 
+            }
             return body;
         }
 
@@ -90,6 +91,13 @@
             }
             view.addChild(gameItem);
             space.push(gameItem);
+        }
+
+        function removeFromSpace(gameItem) {
+            var ix = space.indexOf(gameItem);
+            if(ix != -1) {
+                space.splice(ix,1);
+            }
         }
 
         function removeGameItem(gameItem) {
@@ -116,7 +124,6 @@
         }
 
         function playLevel(levelData) {
-            // TODO: load on demand!
             levelData.gameItems.forEach(gameItemFactory);
         }
 
@@ -136,7 +143,9 @@
             createObstacle: createObstacle,
             setGameItemFactory: setGameItemFactory,
             playLevel: playLevel,
-            setDebugMode : setDebugMode
+            setDebugMode : setDebugMode,
+            ground: app.ground,
+            groundY: app.ground.y
         }
     }
 })(window);
