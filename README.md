@@ -59,7 +59,7 @@ To include it you will want to add the following script to `index.html` in the `
 
     <script src="js/view/hud.js"></script>
 
-Find this file in your project and open it. You should see that it declares a function and assigns it to `window.opspark.makeHud`. Read the documentation for `makeHud` and follow it's instructions for adding the heads-up-display to the game. You will want to make a change to the code in `index.html` at `TODO: 1`. Once that is done, you should see the heads-up display!
+Find this file in your project and open it. You should see that it declares a function and assigns it to `window.opspark.makeHud`. Read the documentation for `makeHud` and follow it's instructions for adding the heads-up-display to the game. You will want to make a change to the code in `index.html` at `TODO 1`. Once that is done, you should see the heads-up display!
 
 ![Heads-Up Display](http://i.imgur.com/VG1KvnA.png)
 
@@ -91,7 +91,7 @@ Include the script `js/view/background.js` by adding the following code to the `
 
     <script src="js/view/background.js"></script>
 
-Modify `index.html` at `TODO: 2` to call our newly included code. You will need to supply the appropriate arguments to the function. 
+Modify `index.html` at `TODO 2` to call our newly included code. You will need to supply the appropriate arguments to the function. 
 
 ```js
 var background = opspark.makeBackground(app,ground);
@@ -299,7 +299,7 @@ TK: image
 
 This file is where we are going to be writing our code for the next couple of steps.
 
-# Step 10 - Creating your first obstacle
+# Step 10 - Creating Your First Obstacle
 
 An obstacle is the simplest element in our game. It moves at a fixed speed toward Halle as the game progresses. The obstacle must be avoided by either jumping or ducking and cannot be destroyed by being shot with Halle's gun. If the obstacle collides with Halle, Halle takes damage. If Halle takes enough damage, she dies and the game is over. 
 
