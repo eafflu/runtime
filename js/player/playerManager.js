@@ -122,19 +122,7 @@
     
     function hitTest(body) {
         _player.hitzones().forEach(function(hitzone) {
-            var c = _player.hitzoneContainer();
-            console.log(canvas.width / 2);
-            var cp = c.localToGlobal(c.x + hitzone.x, c.y + hitzone.y);
-            
-            console.log('y:', cp.y);
-            var tranformedBounds = c.getTransformedBounds();
-            console.log('ty:', tranformedBounds.y);
-            
-            var ctp = c.localToGlobal(tranformedBounds.x + hitzone.x, tranformedBounds.y + hitzone.y);
-            
-            var hitzonePoint = _player.localToGlobal(hitzone.x, hitzone.y);
-            
-            console.log('hzpY:', hitzonePoint.y);
+            var hitzonePoint = hitzone.localToGlobal(0,0);
             var distanceProperties = physikz.getDistanceProperties(hitzonePoint, body);
             var hitResult = physikz.hitTestRadial(distanceProperties.distance, hitzone, body);
             if (hitResult.isHit) {
