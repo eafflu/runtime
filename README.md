@@ -295,7 +295,7 @@ And then add the following code to `index.html` following the creation of the ga
 
 Open up `js/level01.js` file in your editor. You should see this:
 
-TK: image
+![Level01.js](https://i.imgur.com/hVsROUh.png)
 
 This file is where we are going to be writing our code for the next couple of steps.
 
@@ -324,9 +324,11 @@ Now, add this code:
 
 Once this is done correctly, you should see a gray circle on the screen whice moves towards Halle
 
-TK: image
+![Gray Circle](https://i.imgur.com/Yyk0bEK.png)
 
 The circle you see on the screen is the "hit zone" for the obstacle. Once that hit zone collides with Halle, you should see Halle's health indicator decrease by the amount you specified in `damageFromObstacle`. Halle has hitzone's too. Open up `index.html` and find the `debugHalleHitZones` variable and change it to `true` You should now see the circles that make up Halle's hitzone.
+
+![Halle Hitzone](https://i.imgur.com/vdwaY4M.png)
 
 Change the `y` property of `myObstacle` so that it eventually collides with Halle
 
@@ -337,10 +339,18 @@ Let's make our first obstacle be a sawblade. Add the following code:
     var sawbladeBitmap = draw.bitmap('img/sawblade.png');
     myObstacle.addChild(sawbladeBitmap);
 
-This loads up an image and adds it to our obstacle. You should now see a sawblade on the screen. You should also notice that sawblade doesn't fit within the hitzone. That is because when we `myObstacle.addChild()` the image is placed at the origin of the hitzone. You should adjust the `x` and `y` property of `myObstacle` so that it fits within the hit zone.
+This loads up an image and adds it to our obstacle. You should now see a sawblade on the screen. 
+
+![Sawblade](https://i.imgur.com/T9eSaWb.png)
+
+You should also notice that sawblade doesn't fit within the hitzone. That is because when we `myObstacle.addChild()` the image is placed at the origin of the hitzone. You should adjust the `x` and `y` property of `myObstacle` so that it fits within the hit zone.
 
     sawbladeBitmap.x = -25;
     sawbladeBitmap.y = -25;
+
+When you are done you should see:
+
+![Sawblade correctly positioned](https://i.imgur.com/P6PIIEe.png)
 
 You can hide your hitzones for now. 
 
@@ -358,11 +368,11 @@ var createSawBlade = function(x,y) {
 }  
 ```
 
-Select the code that creates your sawblade and move it into the body of `createSawBlade()`. Adapt that code to use the `x` and `y` parameters to place the sawblade at `(x,y)` on the screen.
+Select the code that creates your sawblade and adds it to the game and move it into the body of `createSawBlade()`. Adapt that code to use the `x` and `y` parameters to place the sawblade at `(x,y)` on the screen.
 
-Call `createSawBlade()` three times with different `x` and `y` arguments in order to place the sawblade at different locations. You should place the sawblades so Halle can jump over one with each of the two jump moves and duct to avoid one of them. 
+Call `createSawBlade()` three times with different `x` and `y` arguments in order to place the sawblade at different locations. You should place the sawblades so Halle can jump over one with each of the two jump moves and duck to avoid one of them. 
 
-TK: image
+![Three Sawblades](https://i.imgur.com/h1uGz6p.png)
 
 # Step 12 - Level Data
 
@@ -373,6 +383,8 @@ Look at the `levelData` variable in `js/level01.js`, you should see three objets
 Delete your calls to the `createSawBlade` function and replace them with code that uses the data `gameItems` property of `levelData` to define where the sawblades are placed. Use the `forEach()` function. 
 
 Add a couple more sawblades to your game.
+
+![Lots Of Sawblades](https://i.imgur.com/HXJtMAN.png)
 
 # Step 13 - Roll Your Own Obstacles
 
