@@ -31,13 +31,18 @@
         var ty = bodyA.y + distanceY / distance * radiusCombined;
         var ax = (tx - bodyB.x) * _spring;
         var ay = (ty - bodyB.y) * _spring;
-        bodyA.velocityX -= ax;
-        bodyA.velocityY -= ay;
-        bodyB.velocityX += ax;
-        bodyB.velocityY += ay;
-        
-        bodyA.handleCollision(impactProperties.impact, bodyB);
-        bodyB.handleCollision(impactProperties.impact, bodyA);
+
+        // the only collisions we want to deal with are projectile and an element, 
+        if(bodyB.type == 'projectile') {
+            bodyA.handleCollision(impactProperties.impact, bodyB);
+            bodyB.velocityX += ax;
+            bodyB.velocityY += ay;
+        }
+        if(bodyA.type == 'projectile') {
+            bodyB.handleCollision(impactProperties.impact, bodyA);
+            bodyA.velocityX -= ax;
+            bodyA.velocityY -= ay;
+        }
     }
     
     

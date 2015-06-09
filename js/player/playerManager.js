@@ -151,16 +151,6 @@
          */
         
         var body = distanceProperties.bodyB; // the obstacle
-        var hitzonePoint = distanceProperties.bodyA; // halle's hitzone translated to a global point //
-        var radiusCombined = hitResult.radiusCombined;
-        
-        var tx = body.x + distanceProperties.distanceX / distanceProperties.distance * radiusCombined;
-        var ty = body.y + distanceProperties.distanceY / distanceProperties.distance * radiusCombined;
-        var ax = (tx - hitzonePoint.x) * rules.spring;
-        var ay = (ty - hitzonePoint.y) * rules.spring;
-        body.velocityX += ax;
-        body.velocityY += ay;
-        
         body.handleCollision(impactProperties.impact, impactProperties.bodyA); // orb handling collision with hitzone //
         impactProperties.bodyA.handleCollision(impactProperties.impact, body); // halle's hitzone handling collision with orb //
     }

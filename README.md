@@ -59,7 +59,7 @@ To include it you will want to add the following script to `index.html` in the `
 
     <script src="js/view/hud.js"></script>
 
-Find this file in your project and open it. You should see that it declares a function and assigns it to `window.opspark.makeHud`. Read the documentation for `makeHud` and follow it's instructions for adding the heads-up-display to the game. You will want to make a change to the code in `index.html` at `TODO: 1`. Once that is done, you should see the heads-up display!
+Find this file in your project and open it. You should see that it declares a function and assigns it to `window.opspark.makeHud`. Read the documentation for `makeHud` and follow it's instructions for adding the heads-up-display to the game. You will want to make a change to the code in `index.html` at `TODO 1`. Once that is done, you should see the heads-up display!
 
 ![Heads-Up Display](http://i.imgur.com/VG1KvnA.png)
 
@@ -91,7 +91,7 @@ Include the script `js/view/background.js` by adding the following code to the `
 
     <script src="js/view/background.js"></script>
 
-Modify `index.html` at `TODO: 2` to call our newly included code. You will need to supply the appropriate arguments to the function. 
+Modify `index.html` at `TODO 2` to call our newly included code. You will need to supply the appropriate arguments to the function. 
 
 ```js
 var background = opspark.makeBackground(app,ground);
@@ -275,4 +275,140 @@ Make sure you understand what each line of this code does. Change how the buildi
 
 Now, write code in `update()` that animates the boxes so that they move towards Halle. Use the technique we applied to `backgroundBox` to make the buildings continually appear in the game as Halle walks. 
 
+# Step 9 - Setting Up Gameplay
 
+You've created a rad background and are now ready to move on to gameplay. You'll be coding up and designing some game elements which Halle can interact with. The game manager provides an API for creating objects which move around the screen and can be run into, jumped over, or shot with Halle's gun. 
+
+To create a new game manager, add the following code to `index.html` after `TODO: 3` 
+    
+    var game = opspark.createGameManager(app,hud);
+
+The "level" file is where we are going to define all of our gameplay for our game. Add the following script to `index.html` in the `<head>` element underneath the commment that says `<!-- add any additional scripts here -->` 
+
+```html
+<script src="js/level01.js"></script>
+```
+
+And then add the following code to `index.html` following the creation of the game manager
+
+    opspark.runLevelInGame(game);
+
+Open up `js/level01.js` file in your editor. You should see this:
+
+![Level01.js](https://i.imgur.com/hVsROUh.png)
+
+This file is where we are going to be writing our code for the next couple of steps.
+
+# Step 10 - Creating Your First Obstacle
+
+An obstacle is the simplest element in our game. It moves at a fixed speed toward Halle as the game progresses. The obstacle must be avoided by either jumping or ducking and cannot be destroyed by being shot with Halle's gun. If the obstacle collides with Halle, Halle takes damage. If Halle takes enough damage, she dies and the game is over. 
+
+We will create our first obstacle in `js/level01.js` inside of the `runLevelInGame` function. 
+
+    var hitZoneSize = 25;
+    var damageFromObstacle = 10;
+    var myObstacle = game.createObstacle(hitZoneSize,damageFromObstacle);
+
+This code declare a variable `myObstacle` and create a new obstacle using the Game Managers `createObstacle()` function. The `createObstacle` function takes two parameters which define the size of the object (`hitZoneSize`) and how much damage the obstacle does when it collides with Halle (`damageFromObstacle`)
+
+Add this code:
+
+    myObstacle.x = 400;
+    myObstacle.y = 100;
+
+This position that obstacle somewhere on screen by modifying the `x` and `y` properties of `myObstacle` 
+
+Now, add this code:
+
+    game.addGameItem(myObstacle);    
+
+Once this is done correctly, you should see a gray circle on the screen whice moves towards Halle
+
+![Gray Circle](https://i.imgur.com/Yyk0bEK.png)
+
+The circle you see on the screen is the "hit zone" for the obstacle. Once that hit zone collides with Halle, you should see Halle's health indicator decrease by the amount you specified in `damageFromObstacle`. Halle has hitzone's too. Open up `index.html` and find the `debugHalleHitZones` variable and change it to `true` You should now see the circles that make up Halle's hitzone.
+
+![Halle Hitzone](https://i.imgur.com/vdwaY4M.png)
+
+Change the `y` property of `myObstacle` so that it eventually collides with Halle
+
+The hitzones in our game are used for collision detection and always present, but when we are playing our game we don't actually show them. Instead of circles we draw something that represents our obstacle. 
+
+Let's make our first obstacle be a sawblade. Add the following code:
+
+    var sawbladeBitmap = draw.bitmap('img/sawblade.png');
+    myObstacle.addChild(sawbladeBitmap);
+
+This loads up an image and adds it to our obstacle. You should now see a sawblade on the screen. 
+
+![Sawblade](https://i.imgur.com/T9eSaWb.png)
+
+You should also notice that sawblade doesn't fit within the hitzone. That is because when we `myObstacle.addChild()` the image is placed at the origin of the hitzone. You should adjust the `x` and `y` property of `myObstacle` so that it fits within the hit zone.
+
+    sawbladeBitmap.x = -25;
+    sawbladeBitmap.y = -25;
+
+When you are done you should see:
+
+![Sawblade correctly positioned](https://i.imgur.com/P6PIIEe.png)
+
+You can hide your hitzones for now. 
+
+In `index.html` change the `debugHalleHitZones` variable to false.
+
+In `js/level01.js` pass `false` to the method `game.setDebugMode()` 
+
+# Step 11 - Many Obstacles
+
+Declare a function `createSawBlade` with two parameters `x` and `y`
+
+```js
+var createSawBlade = function(x,y) {
+    // your code goes here
+}  
+```
+
+Select the code that creates your sawblade and adds it to the game and move it into the body of `createSawBlade()`. Adapt that code to use the `x` and `y` parameters to place the sawblade at `(x,y)` on the screen.
+
+Call `createSawBlade()` three times with different `x` and `y` arguments in order to place the sawblade at different locations. You should place the sawblades so Halle can jump over one with each of the two jump moves and duck to avoid one of them. 
+
+![Three Sawblades](https://i.imgur.com/h1uGz6p.png)
+
+# Step 12 - Level Data
+
+In a professional game, the programmers write the code for a game enginewhich runs on data which is built by game designers. This data, as well as all of the artwork, defines the entire world of the game. Separating the game code from the data allows you to easily modify the behavior and gameplay of the game without actually modifying the code. 
+
+Look at the `levelData` variable in `js/level01.js`, you should see three objets in the `gameItems` property. 
+
+Delete your calls to the `createSawBlade` function and replace them with code that uses the data `gameItems` property of `levelData` to define where the sawblades are placed. Use the `forEach()` function. 
+
+Add a couple more sawblades to your game.
+
+![Lots Of Sawblades](https://i.imgur.com/HXJtMAN.png)
+
+# Step 13 - Roll Your Own Obstacles
+
+You are now ready to add new kinds of obstacles to your game. To do this, decide what kinds of obstacle you want in your game and choose a name for it. As an example, I am going to create a very boring obstacle which I will call "evilSquare". **You** should name your obstacle something else, and change the code accordingly.
+
+First, write a function that creates your obstacle
+
+```js
+var createEvilSquare = function(x,y) {
+    // ????
+};
+```
+
+Then, test it by calling that function directly.
+
+```
+createEvilSquare(100,200);
+```
+
+Then, modify `levelData` to add additional obstacles with that type. Here is an example object you should add to the `gameItems` property of `levelData`
+
+```js
+{type: 'evilSquare',x:100,y:200}
+```
+
+
+Finally, modify your function that you use in `forEach()` to handle that new type of obstacle. 

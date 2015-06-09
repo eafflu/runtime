@@ -40,6 +40,8 @@
         <script src="js/game.js"></script>
 
        <!-- add any additional scripts here -->
+       <script src="js/view/hud.js"></script>
+       <script src="js/view/background.js"></script>
 
         <style type="text/css">
             /*override default styles here*/
@@ -83,8 +85,10 @@
                 particleManager = opspark.makeParticleManager(app.stage);
                 ground = opspark.makeGround(app);
 
-                // TODO 2 : add background
-                
+                // TODO 2 : create background
+                var background = opspark.makeBackground(app,ground);
+                view.addChild(background);
+
                 var help = draw.textfield('MOVES || w: jump | e: flying jump | s: duck | space: fire | q your mom!', 
                     '20px Arial',
                     '#ccc', 'left');
@@ -95,6 +99,7 @@
                 window.opspark.makeSpriteSheet(data)
                     .then(function (ss) {
                         spritesheet = ss;
+                        
                         halle = window.opspark.makeHalle(spritesheet, particleManager,debugHalleHitZones);
                         halle.x = halle.getBounds().width * 2;
                         halle.y = ground.y - halle.getBounds().height + 3;
@@ -122,6 +127,8 @@
                 }
                 
                 // TODO 1 : add a heads-up display to game
+                hud = opspark.makeHud();
+                view.addChild(hud);
 
                 // TODO 3 : create game manager
 
