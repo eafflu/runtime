@@ -188,14 +188,60 @@
             return gameItem;
         }
 
+        /* must be set before call to playLevel with function that 
+           create a game item when passed an object from gameItems
+         */
         var gameItemFactory;
         function setGameItemFactory(factory) {
             gameItemFactory = factory;
         }
 
+        /* Improves performance by lazily creating objects defined in 
+           levelData
+         */
         function playLevel(levelData) {
-            levelData.gameItems.forEach(gameItemFactory);
+            if(gameItemFactory == null) {
+                throw new Error("No gameItemFactory set");
+            }
+            var items = levelData.gameItems.map(function(gameItem) {
+                return {
+                    created: false,
+                    gameItem: gameItem
+                };
+            });
+            var levelLength = levelData.totalLength || 0;
+            var frameNo = 0;
+
+            app.addUpdateable({update: function() {
+                
+                // lazily instantiate items just before the come onto the screen
+                // to improve performance
+                frameNo += 1;
+                var displacement = -levelData.speed*frameNo;
+                items.forEach(function(item) {
+                    if(!item.created) {
+                        var x1 = item.gameItem.x + displacement;
+                        if(x1 < app.canvas.width+100) {
+                            item.created = true;
+                            var newGameItem = _.clone(item.gameItem);
+                            newGameItem.x = x1;
+                            gameItemFactory(newGameItem);
+                        }
+                    }
+                });
+
+                // remove objects that have been moved offscreen
+                var offscreenLeft = view.children.filter(function(obj) {
+                    return obj.x && obj.x < -100 && space.indexOf(obj) != -1;
+                });
+                offscreenLeft.forEach(function(item) {
+                    // console.log("removed offscreen item",item)
+                    removeGameItem(item);
+                });
+            }});
         }
+
+
 
         var debugMode = false;
 
