@@ -305,20 +305,22 @@ An obstacle is the simplest element in our game. It moves at a fixed speed towar
 
 We will create our first obstacle in `js/level01.js` inside of the `runLevelInGame` function. 
 
+Add this code below the comment that says `// BEGIN EDITING YOUR CODE HERE`
+
     var hitZoneSize = 25;
     var damageFromObstacle = 10;
     var myObstacle = game.createObstacle(hitZoneSize,damageFromObstacle);
 
-This code declare a variable `myObstacle` and create a new obstacle using the Game Managers `createObstacle()` function. The `createObstacle` function takes two parameters which define the size of the object (`hitZoneSize`) and how much damage the obstacle does when it collides with Halle (`damageFromObstacle`)
+This code declare a variable `myObstacle` and creates a new obstacle using the game's `createObstacle()` function. The `createObstacle` function takes two parameters which define the size of the object (`hitZoneSize`) and how much damage the obstacle does when it collides with Halle (`damageFromObstacle`)
 
-Add this code:
+Add this code to the code you just wrote
 
     myObstacle.x = 400;
     myObstacle.y = 100;
 
 This position that obstacle somewhere on screen by modifying the `x` and `y` properties of `myObstacle` 
 
-Now, add this code:
+Finally, add this code:
 
     game.addGameItem(myObstacle);    
 
@@ -368,19 +370,19 @@ var createSawBlade = function(x,y) {
 }  
 ```
 
-Select the code that creates your sawblade and adds it to the game and move it into the body of `createSawBlade()`. Adapt that code to use the `x` and `y` parameters to place the sawblade at `(x,y)` on the screen.
+Identify the code that creates your sawblade and adds it to the game and move it into the body of `createSawBlade()`. Adapt that code to use the `x` and `y` parameters to place the sawblade at `(x,y)` on the screen.
 
-Call `createSawBlade()` three times with different `x` and `y` arguments in order to place the sawblade at different locations. You should place the sawblades so Halle can jump over one with each of the two jump moves and duck to avoid one of them. 
+Call `createSawBlade()` three times with different `x` and `y` arguments in order to place the sawblade at different locations. You should place the sawblades so Halle can jump over some and duck others.
 
 ![Three Sawblades](https://i.imgur.com/h1uGz6p.png)
 
 # Step 12 - Level Data
 
-In a professional game, the programmers write the code for a game enginewhich runs on data which is built by game designers. This data, as well as all of the artwork, defines the entire world of the game. Separating the game code from the data allows you to easily modify the behavior and gameplay of the game without actually modifying the code. 
+In a professional game, the programmers write the code for a game engine which runs on data which is built by game designers. This data, as well as all of the artwork, defines the entire world of the game. Separating the game code from the data allows you to easily modify the behavior and gameplay of the game without actually modifying the code. 
 
 Look at the `levelData` variable in `js/level01.js`, you should see three objets in the `gameItems` property. 
 
-Delete your calls to the `createSawBlade` function and replace them with code that uses the data `gameItems` property of `levelData` to define where the sawblades are placed. Use the `forEach()` function. 
+Delete your calls to the `createSawBlade` function and replace them with code that uses the data from the `gameItems` property of `levelData` to define where the sawblades are placed. Use the Array [forEach](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach) function. 
 
 Add a couple more sawblades to your game.
 
@@ -411,4 +413,4 @@ Then, modify `levelData` to add additional obstacles with that type. Here is an 
 ```
 
 
-Finally, modify your function that you use in `forEach()` to handle that new type of obstacle. 
+Finally, modify your function that you pass into `forEach()` to handle that new type of obstacle. 
