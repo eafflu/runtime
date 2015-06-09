@@ -305,19 +305,21 @@ An obstacle is the simplest element in our game. It moves at a fixed speed towar
 
 We will create our first obstacle in `js/level01.js` inside of the `runLevelInGame` function. 
 
-First, declare a variable `myObstacle` and create a new obstacle using the Game Managers `createObstacle()` function. The `createObstacle` function takes two parameters which define the size of the object (`hitZoneSize`) and how much damage the obstacle does when it collides with Halle (`damageFromObstacle`)
-
     var hitZoneSize = 25;
     var damageFromObstacle = 10;
     var myObstacle = game.createObstacle(hitZoneSize,damageFromObstacle);
 
-Then position that obstacle somewhere on screen by modifying the `x` and `y` properties of `myFirstObstacle` 
+This code declare a variable `myObstacle` and create a new obstacle using the Game Managers `createObstacle()` function. The `createObstacle` function takes two parameters which define the size of the object (`hitZoneSize`) and how much damage the obstacle does when it collides with Halle (`damageFromObstacle`)
+
+Add this code:
 
     myObstacle.x = 400;
     myObstacle.y = 100;
 
-And finally add it to the game by calling the `addGameItem` function
-    
+This position that obstacle somewhere on screen by modifying the `x` and `y` properties of `myObstacle` 
+
+Now, add this code:
+
     game.addGameItem(myObstacle);    
 
 Once this is done correctly, you should see a gray circle on the screen whice moves towards Halle
@@ -330,7 +332,7 @@ Change the `y` property of `myObstacle` so that it eventually collides with Hall
 
 The hitzones in our game are used for collision detection and always present, but when we are playing our game we don't actually show them. Instead of circles we draw something that represents our obstacle. 
 
-Let's make our first obstable be a sawblade. Add the following code:
+Let's make our first obstacle be a sawblade. Add the following code:
 
     var sawbladeBitmap = draw.bitmap('img/sawblade.png');
     myObstacle.addChild(sawbladeBitmap);
@@ -346,4 +348,55 @@ In `index.html` change the `debugHalleHitZones` variable to false.
 
 In `js/level01.js` pass `false` to the method `game.setDebugMode()` 
 
+# Step 11 - Many Obstacles
 
+Declare a function `createSawBlade` with two parameters `x` and `y`
+
+```js
+var createSawBlade = function(x,y) {
+    // your code goes here
+}  
+```
+
+Select the code that creates your sawblade and move it into the body of `createSawBlade()`. Adapt that code to use the `x` and `y` parameters to place the sawblade at `(x,y)` on the screen.
+
+Call `createSawBlade()` three times with different `x` and `y` arguments in order to place the sawblade at different locations. You should place the sawblades so Halle can jump over one with each of the two jump moves and duct to avoid one of them. 
+
+TK: image
+
+# Step 12 - Level Data
+
+In a professional game, the programmers write the code for a game enginewhich runs on data which is built by game designers. This data, as well as all of the artwork, defines the entire world of the game. Separating the game code from the data allows you to easily modify the behavior and gameplay of the game without actually modifying the code. 
+
+Look at the `levelData` variable in `js/level01.js`, you should see three objets in the `gameItems` property. 
+
+Delete your calls to the `createSawBlade` function and replace them with code that uses the data `gameItems` property of `levelData` to define where the sawblades are placed. Use the `forEach()` function. 
+
+Add a couple more sawblades to your game.
+
+# Step 13 - Roll Your Own Obstacles
+
+You are now ready to add new kinds of obstacles to your game. To do this, decide what kinds of obstacle you want in your game and choose a name for it. As an example, I am going to create a very boring obstacle which I will call "evilSquare". **You** should name your obstacle something else, and change the code accordingly.
+
+First, write a function that creates your obstacle
+
+```js
+var createEvilSquare = function(x,y) {
+    // ????
+};
+```
+
+Then, test it by calling that function directly.
+
+```
+createEvilSquare(100,200);
+```
+
+Then, modify `levelData` to add additional obstacles with that type. Here is an example object you should add to the `gameItems` property of `levelData`
+
+```js
+{type: 'evilSquare',x:100,y:200}
+```
+
+
+Finally, modify your function that you use in `forEach()` to handle that new type of obstacle. 
