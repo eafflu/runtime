@@ -390,12 +390,12 @@ Add a couple more sawblades to your game.
 
 # Step 13 - Roll Your Own Obstacles
 
-You are now ready to add new kinds of obstacles to your game. To do this, decide what kinds of obstacle you want in your game and choose a name for it. As an example, I am going to create a very boring obstacle which I will call "evilSquare". **You** should name your obstacle something else, and change the code accordingly.
+You are now ready to add new kinds of obstacles to your game. To do this, decide what kinds of obstacle you want in your game and choose a name for it. As an example, I am going to create a very boring obstacle which I will call "box". **You** should name your obstacle something else, and change the code accordingly.
 
 First, write a function that creates your obstacle
 
 ```js
-var createEvilSquare = function(x,y) {
+var createBox = function(x,y) {
     // ????
 };
 ```
@@ -403,13 +403,13 @@ var createEvilSquare = function(x,y) {
 Then, test it by calling that function directly.
 
 ```
-createEvilSquare(100,200);
+createBox(100,200);
 ```
 
 Then, modify `levelData` to add additional obstacles with that type. Here is an example object you should add to the `gameItems` property of `levelData`
 
 ```js
-{type: 'evilSquare',x:100,y:200}
+{type: 'box',x:100,y:200}
 ```
 
 
