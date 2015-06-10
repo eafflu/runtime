@@ -338,8 +338,8 @@ The hitzones in our game are used for collision detection and always present, bu
 
 Let's make our first obstacle be a sawblade. Add the following code:
 
-    var sawbladeBitmap = draw.bitmap('img/sawblade.png');
-    myObstacle.addChild(sawbladeBitmap);
+    var obstacleImage = draw.bitmap('img/sawblade.png');
+    myObstacle.addChild(obstacleImage);
 
 This loads up an image and adds it to our obstacle. You should now see a sawblade on the screen. 
 
@@ -347,8 +347,8 @@ This loads up an image and adds it to our obstacle. You should now see a sawblad
 
 You should also notice that sawblade doesn't fit within the hitzone. That is because when we `myObstacle.addChild()` the image is placed at the origin of the hitzone. You should adjust the `x` and `y` property of `myObstacle` so that it fits within the hit zone.
 
-    sawbladeBitmap.x = -25;
-    sawbladeBitmap.y = -25;
+    obstacleImage.x = -25;
+    obstacleImage.y = -25;
 
 When you are done you should see:
 
