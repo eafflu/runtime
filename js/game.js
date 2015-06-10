@@ -25,6 +25,13 @@
             return score;
         }
 
+        // XXX: this is a glorious hack in order to get halle because
+        // we forgot to pass it in originally
+        function getHalle() {
+            var halleObj = view.children.filter(function(c) { return !!c.jumpfly; });
+            return halleObj.length > 0 ? halleObj[0] : null;
+        }
+
         /* change the integry displayed in the hud. If the amount is positive
            the integrity will increase, and if the amount is negative the 
            integrity will decrease. If the total integrity ever goes below zero
@@ -34,9 +41,18 @@
             health += amount;
             console.log("setting integrity = ",health);
             hud.setIntegrity(health);
-            if(health < 0) {
+            if(health <= 0) {
                 hud.kill();
-                halle.die();
+                halle = getHalle();
+                if(halle) {
+                    // prevent replay of die animation - gameover is fired once animation is complete
+                    // this still does not prevent collisions from being reported
+                    // but no easy way to handle this without touching a bunch of code in other places
+                    halle.addEventListener("gameover", function() {
+                        view.removeChild(halle);
+                    });
+                    halle.die();
+                }
             }
         }
 
