@@ -417,9 +417,9 @@ Finally, modify your function that you pass into `forEach()` to handle that new 
 
 # Step 14 - Enemies!
 
-Obstacles are only one kind of thing you might find in a game. In most games, you have enemies you have to avoid or shoot as well as different items which you can collect to increase your score or give you powers. We started our game with obstacles because they were the simplest think to make, but now that we understand the basics we can create more complex things for Halle to interact with.
+Obstacles are only one kind of thing you might find in a game. In most games, you have enemies you have to avoid or shoot as well as different items which you can collect to increase your score or give you powers. We started our game with obstacles because they were the simplest thing to make, but now that we understand the basics we can create more complex things for Halle to interact with.
 
-If you look in `src/js/game.js` at the `createObstacle()` function you will see the following code
+If you look in `src/js/game.js` at the `createObstacle()` function, you will see the following code:
 
 ```js
 function createObstacle(radius,damage) {
@@ -486,22 +486,22 @@ Modify the code you just wrote so that the square collides with Halle.
 
 ## rotationalVelocity
 
-The `rotationalVelocity` property of a game item allows for you to change the rotation of an object over time. The value of `rotationalVelocity` determines how many degrees the objects rotates in each frame.
+The `rotationalVelocity` property of a game item allows for you to change the rotation over time. The value of `rotationalVelocity` determines how many degrees the objects rotates in each frame.
 
 Write the code to set the `rotationVelocity` property of the `enemy` game item to the value `10` and see what happens.
 
 ## onPlayerCollision
 
-The `onPlayerCollision` property holds a different kind of value. Instead of a number or a string, it's value is a function. The function is called whenever that game item collides with Halle. You may have noticed that our enemy passes through Halle without any kind of effect. That is because when the game item is first created, the function in the `onPlayerCollision` property does nothing. 
+The `onPlayerCollision` property holds a different kind of value. Instead of a number or a string, its value is a function. The function is called whenever that game item collides with Halle. You may have noticed that our enemy passes through Halle without any kind of effect. That is because when the game item is first created, the function in the `onPlayerCollision` property does nothing. 
 
-However, we can change that. Assign your own function to the `onPlayerCollision` property
+However, we can change that. Fist, write an empty function and assign it to the `onPlayerCollision` property.
 
 ```js
 enemy.onPlayerCollision = function() {
 };
 ```
 
-To test that is is being called correctly, write the following code inside the function you just created.
+To test that is is being called correctly, add the following code inside the function you just created.
 
 ```js
 console.log('The enemy has hit Halle');
@@ -523,19 +523,19 @@ Calling it with a positive number:
 
 causes Halle to gain *integrity* or lose damage 
 
-Try adding that code to your `onPlayerCollision` function with a couple different numbers and see what happens.
+Try calling the `changeIntegrity()` function on the `game` object in your `onPlayerCollision` function with a couple different arguments and see what happens.
 
 ## onProjectileCollision
 
 The `onProjectileCollision` property works much like `onPlayerCollision` but instead the function is called whenever Halle successfully shoots the game item.
 
-Write some code that prints out "Halle has hit the enemy" whenever Halle shoots the enemy. Once this is done, you should be able to open the JavaScript console and see the message whenever you shoot the enemy.
+Write some code that prints out "Halle has hit the enemy" whenever Halle shoots an enemy. Once this is done, you should be able to open the JavaScript console and see the message whenever you shoot an enemy.
 
 The `game.increaseScore()` function lets you change the score of the game. Add this code to the function you just wrote
 
 `game.increaseScore(100);`
 
-You should see your score increase when Halle shoots the enemy.
+You should see your score increase when Halle shoots an enemy.
 
 ## Behaviors
 
@@ -547,17 +547,17 @@ Each game item has three built-in behaviors that you can call in response to eve
 `shrink()` will cause the item to decrease in size out of existence
 `flyTo(x,y)` will cause the item to quickly move to a place on screen defined by `x` and `y`
 
-Try adding the following code to your function assigned to `enemy.onPlayerCollision`
+Try adding the following code to the function assigned to `enemy.onPlayerCollision`
 
 ```js
 enemy.fadeOut();
 ```
 
-Now use one of the functions described above in the function assigned to `enemy.onProjectileCollision` to make the enemy disappear whenever Halle shoots it.
+Now use one of the behavior functions described above in the function assigned to `enemy.onProjectileCollision` to make the enemy disappear whenever Halle shoots it.
 
 # Step 15 - Design An Enemy
 
-You know should know enough to make your own kind of enemy.  To get started, take all of the code you wrote in the last step and move it into a new function called `createEnemy`
+You now should know enough to make your own enemy. To get started, take all of the code you wrote in the last step and move it into a new function called `createEnemy`
 
 ```js
 function createEnemy() {
@@ -571,9 +571,9 @@ Introduce two parameters `x` and `y` into your function
 function createEnemy(x,y) {
 ```
 
-Then use `x` and `y` in your function body to place the enemy in those locations.
+Then use `x` and `y` in your function body to place the enemy in a location given by those parameters.
 
-You can now call the `createEnemy()` function multiple times to make many enemies.
+You can now call the `createEnemy()` function multiple times to make several enemies. 
 
 ```
 createEnemy(400,groundY-10);
@@ -581,7 +581,7 @@ createEnemy(800,groundY-100);
 createEnemy(1200,groundY-500);
 ```
 
-Once you have written the code correctly you will have a working enemy for your game. Now you need to make it your own. Change the code in your `createEnemy` function to customize the enemy for your game. 
+Once you have completed this step, you will have a working enemy for your game. Now you need to make it your own. Change the code in your `createEnemy` function to customize the enemy for **your** game. 
 
 Finally, add an object for your enemy locations in `levelData.gameItems` and then modify your code to create enemies from that data. 
 
