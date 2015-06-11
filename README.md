@@ -47,15 +47,15 @@ Before we start coding, we have to decide what kind of game we want to build wit
 
 You will need to decide on a general *theme* for the game. What kind of world is Halle in? Is she in space, in a factory, on the streets of New Orleans? 
 
-What are the *game mechanics*? What are the goals and what are the challenges? What might halle encounter as the game progresses? Are there points or a score? How does the game end? 
+What are the *game mechanics*? What are the goals and what are the challenges? What might Halle encounter as the game progresses? Are there points or a score? How does the game end? 
 
 Finally, come up with a good *name* for your game. Having a great name for a project is an important step, but don't worry, you can always change it later. 
 
 # Step 3 - Adding The Heads-Up Display
 
-Most games display *status information* like the current score or number of lives remaining overlayed with the running game at either the top or bottom of the screen. We call this a "Heads-Up Display" and we've already written one for you in `js/view/hud.js`
+Most games display *status information* like the current score or number of lives remaining overlaid with the running game at either the top or bottom of the screen. We call this a "Heads-Up Display" and we've already written one for you in `js/view/hud.js`
 
-To include it you will want to add the following script to `index.html` in the `<head>` element underneat the commment that says `<!-- add any additional scripts here -->` 
+To include it you will want to add the following script to `index.html` in the `<head>` element underneath the commment that says `<!-- add any additional scripts here -->` 
 
     <script src="js/view/hud.js"></script>
 
@@ -138,7 +138,7 @@ See the [opspark-draw documentation](https://libraries.io/bower/opspark-draw) fo
 
 # Step 5 - Create Your Own Background
 
-Create a great background for your game. With the draw functions provided and your javascript knowledge, you can create almost anything.
+Create a great background for your game. With the draw functions provided and your JavaScript knowledge, you can create almost anything.
 
 All drawing code for the background should go at `TODO: 3` in `js/view/background.js` within the `render()` function. 
 
@@ -283,7 +283,7 @@ To create a new game manager, add the following code to `index.html` after `TODO
     
     var game = opspark.createGameManager(app,hud);
 
-The "level" file is where we are going to define all of our gameplay for our game. Add the following script to `index.html` in the `<head>` element underneath the commment that says `<!-- add any additional scripts here -->` 
+The "level" file is where we are going to define all of our gameplay for our game. Add the following script to `index.html` in the `<head>` element underneath the comment that says `<!-- add any additional scripts here -->` 
 
 ```html
 <script src="js/level01.js"></script>
@@ -324,11 +324,11 @@ Finally, add this code:
 
     game.addGameItem(myObstacle);    
 
-Once this is done correctly, you should see a gray circle on the screen whice moves towards Halle
+Once this is done correctly, you should see a gray circle on the screen which moves towards Halle.
 
 ![Gray Circle](https://i.imgur.com/Yyk0bEK.png)
 
-The circle you see on the screen is the "hit zone" for the obstacle. Once that hit zone collides with Halle, you should see Halle's health indicator decrease by the amount you specified in `damageFromObstacle`. Halle has hitzone's too. Open up `index.html` and find the `debugHalleHitZones` variable and change it to `true` You should now see the circles that make up Halle's hitzone.
+The circle you see on the screen is the "hit zone" for the obstacle. Once that hit zone collides with Halle, you should see Halle's health indicator decrease by the amount you specified in `damageFromObstacle`. Halle has hitzones too. Open up `index.html` and find the `debugHalleHitZones` variable and change it to `true` You should now see the circles that make up Halle's hitzone.
 
 ![Halle Hitzone](https://i.imgur.com/vdwaY4M.png)
 
@@ -336,23 +336,23 @@ Change the `y` property of `myObstacle` so that it eventually collides with Hall
 
 The hitzones in our game are used for collision detection and always present, but when we are playing our game we don't actually show them. Instead of circles we draw something that represents our obstacle. 
 
-Let's make our first obstacle be a sawblade. Add the following code:
+Let's make our first obstacle be a saw blade. Add the following code:
 
     var obstacleImage = draw.bitmap('img/sawblade.png');
     myObstacle.addChild(obstacleImage);
 
-This loads up an image and adds it to our obstacle. You should now see a sawblade on the screen. 
+This loads up an image and adds it to our obstacle. You should now see a saw blade on the screen. 
 
-![Sawblade](https://i.imgur.com/T9eSaWb.png)
+![Saw blade](https://i.imgur.com/T9eSaWb.png)
 
-You should also notice that sawblade doesn't fit within the hitzone. That is because when we `myObstacle.addChild()` the image is placed at the origin of the hitzone. You should adjust the `x` and `y` property of `myObstacle` so that it fits within the hit zone.
+You should also notice that saw blade doesn't fit within the hitzone. That is because when we `myObstacle.addChild()` the image is placed at the origin of the hitzone. You should adjust the `x` and `y` property of `myObstacle` so that it fits within the hit zone.
 
     obstacleImage.x = -25;
     obstacleImage.y = -25;
 
 When you are done you should see:
 
-![Sawblade correctly positioned](https://i.imgur.com/P6PIIEe.png)
+![Saw blade correctly positioned](https://i.imgur.com/P6PIIEe.png)
 
 You can hide your hitzones for now. 
 
@@ -370,23 +370,23 @@ var createSawBlade = function(x,y) {
 }  
 ```
 
-Identify the code that creates your sawblade and adds it to the game and move it into the body of `createSawBlade()`. Adapt that code to use the `x` and `y` parameters to place the sawblade at `(x,y)` on the screen.
+Identify the code that creates your saw blade and adds it to the game and move it into the body of `createSawBlade()`. Adapt that code to use the `x` and `y` parameters to place the saw blade at `(x,y)` on the screen.
 
-Call `createSawBlade()` three times with different `x` and `y` arguments in order to place the sawblade at different locations. You should place the sawblades so Halle can jump over some and duck others.
+Call `createSawBlade()` three times with different `x` and `y` arguments in order to place the saw blade at different locations. You should place the saw blades so Halle can jump over some and duck others.
 
-![Three Sawblades](https://i.imgur.com/h1uGz6p.png)
+![Three saw blades](https://i.imgur.com/h1uGz6p.png)
 
 # Step 12 - Level Data
 
 In a professional game, the programmers write the code for a game engine which runs on data which is built by game designers. This data, as well as all of the artwork, defines the entire world of the game. Separating the game code from the data allows you to easily modify the behavior and gameplay of the game without actually modifying the code. 
 
-Look at the `levelData` variable in `js/level01.js`, you should see three objets in the `gameItems` property. 
+Look at the `levelData` variable in `js/level01.js`, you should see three objects in the `gameItems` property. 
 
-Delete your calls to the `createSawBlade` function and replace them with code that uses the data from the `gameItems` property of `levelData` to define where the sawblades are placed. Use the Array [forEach](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach) function. 
+Delete your calls to the `createSawBlade` function and replace them with code that uses the data from the `gameItems` property of `levelData` to define where the saw blades are placed. Use the Array [forEach](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach) function. 
 
-Add a couple more sawblades to your game.
+Add a couple more saw blades to your game.
 
-![Lots Of Sawblades](https://i.imgur.com/HXJtMAN.png)
+![Lots Of saw blades](https://i.imgur.com/HXJtMAN.png)
 
 # Step 13 - Roll Your Own Obstacles
 
@@ -417,9 +417,9 @@ Finally, modify your function that you pass into `forEach()` to handle that new 
 
 # Step 14 - Enemies!
 
-Obstacles are only one kind of thing you might find in a game. In most games, you have enemies you have to avoid or shoot, and different items which you can collect to increase your score, or give you powers, etc... We started out with obstacles because they were the simplest kind of thing in a game, but now that we understand the basics we can create more complex things for Halle to interact with.
+Obstacles are only one kind of thing you might find in a game. In most games, you have enemies you have to avoid or shoot as well as different items which you can collect to increase your score or give you powers. We started our game with obstacles because they were the simplest think to make, but now that we understand the basics we can create more complex things for Halle to interact with.
 
-Obstacles are just one (simple) kind of item we can have in our game. In fact, if you look in `src/js/game.js` at the `createObstacle()` function you will see the following
+If you look in `src/js/game.js` at the `createObstacle()` function you will see the following code
 
 ```js
 function createObstacle(radius,damage) {
@@ -433,11 +433,11 @@ function createObstacle(radius,damage) {
 }
 ```
 
-`createObstacle()` calls `createGameItem()`, sets a couple of properties on the returned object, and then return that same object. We are going to be working with `createGameItem()` for the rest of the tutorial instead of `createObstacle()`. Let's try it out and see what it can do.
+`createObstacle()` calls `createGameItem()`, sets a couple of properties on the returned object, and then returns that same object. This provides a clue as to how we might work with the code. We are going to be calling `createGameItem()` for the rest of the tutorial instead of `createObstacle()`. Let's try it out and see what it can do.
 
-We will be adding all of the code to `js/level0.js`. Before we begin, find the call to `game.setDebugMode()` and change the argument to false in order to show our hitzones.
+We will be adding all of the code to `js/level0.js`. Before we begin, find the call to `game.setDebugMode()` and change the argument to `true` in order to show the hitzones.
 
-We are going to create a new game item similair to how we created our other obstacles. Add the following code
+We are going to create a new game item similar to how we created our other obstacles. Add the following code:
 
 ```js
 var enemy =  game.createGameItem('enemy',25);
@@ -454,25 +454,25 @@ enemy.x = 400;
 enemy.y = groundY-50;
 ```
 
-And finally add it to the game
+Finally you can call `addGameItem()` in order to show the enemy on screen.
 
 ```js
 game.addGameItem(enemy);
 ```
 
-When that is done correctly you should see something a red square on the screen
+When that is done correctly you should see a red square on the screen.
 
 ![Red Square](https://i.imgur.com/MrpvAjk.png)
 
-Feel free to customize how your enemy looks. Try making it bigger, or drawing more shapes.
+Feel free to customize how your enemy looks. Try making it bigger or drawing some other shapes.
 
 # Step 15 - Game Item Properties
 
-The variable `enemy` is an object created by `createGameItem()` which has a number of properties you can set in order to customize how the item behaves in the game. In this step, we are going to look at a bunch of those properties. You will write this code in `js/level01.js` anywhere after you have declared and initialized the `enemy` variable. 
+The variable `enemy` is an object created by `createGameItem()` which has a number of properties you can set in order to customize how the item behaves in the game. In this step, we are going to play around with those properties. You will write this code in `js/level01.js` anywhere after you have declared and initialized the `enemy` variable. 
 
 ## velocityX/velocityY
 
-You may have noticed that our enemy is not moving like the sawblades in the previous steps. That is because a game item does not have any velocity be default. A game item's `velocityX` property says how many pixels it will move in the X direction for each frame. Similairly, the `velocityY` property says how many pixels it will move in the Y direciton for each frame. 
+You may have noticed that our enemy is not moving like the saw blades in the previous steps. That is because a game item created by `createGameItem` does not have any *velocity* when it is first created. A game item's `velocityX` property says how many pixels it will move in the X direction for each frame. Similarly, the `velocityY` property says how many pixels it will move in the Y direction for each frame. 
 
 Try writing this:
 
@@ -486,15 +486,15 @@ Modify the code you just wrote so that the square collides with Halle.
 
 ## rotationalVelocity
 
-The `rotationalVelocity` property of a game item allows for you to change the rotation of an object. It determines how many degrees the rotation changes per frame. 
+The `rotationalVelocity` property of a game item allows for you to change the rotation of an object over time. The value of `rotationalVelocity` determines how many degrees the objects rotates in each frame.
 
-Write some code to set the `rotationVelocity` property of the `enemy` game item to the value `10` and see what happens.
+Write the code to set the `rotationVelocity` property of the `enemy` game item to the value `10` and see what happens.
 
 ## onPlayerCollision
 
-The `onPlayerCollision` property has the value of a function which is called whenever the game item collides with Halle. You may have noticed that our enemy passes through Halle without any kind of effect. That is because by default, the function in the `onPlayerCollision` property does nothing. 
+The `onPlayerCollision` property holds a different kind of value. Instead of a number or a string, it's value is a function. The function is called whenever that game item collides with Halle. You may have noticed that our enemy passes through Halle without any kind of effect. That is because when the game item is first created, the function in the `onPlayerCollision` property does nothing. 
 
-We can change that. Assign your own function to the `onPlayerCollision` property
+However, we can change that. Assign your own function to the `onPlayerCollision` property
 
 ```js
 enemy.onPlayerCollision = function() {
@@ -507,15 +507,29 @@ To test that is is being called correctly, write the following code inside the f
 console.log('The enemy has hit Halle');
 ```
 
-Open the Javascript console and confirm that this is working properly.
+Open the JavaScript console and confirm that this is working properly.
 
-To make the enemy do damage when it collides with Halle, you can call `game.changeIntegrity(N)` where `N` is some number. A negative number causes Halle to lose "integrity" and a positive number causes Halle to gain "integry". Try adding that code to your `onPlayerCollision` function with a couple different numbers and see what happens.
+To make the enemy do damage when it collides with Halle, you can call the `game.changeIntegrity()` function. 
+
+Calling it with a negative number:
+
+`game.changeIntegrity(-10);`
+
+causes Halle to lose *integrity* or take damage
+
+Calling it with a positive number:
+
+`game.changeIntegrity(10);`
+
+causes Halle to gain *integrity* or lose damage 
+
+Try adding that code to your `onPlayerCollision` function with a couple different numbers and see what happens.
 
 ## onProjectileCollision
 
 The `onProjectileCollision` property works much like `onPlayerCollision` but instead the function is called whenever Halle successfully shoots the game item.
 
-Write some code that prints out "Halle has hit the enemy" whenever Halle shoots the enemy. Once this is done, you should be able to open the Javascript console and see the message whenever you shoot the enemy.
+Write some code that prints out "Halle has hit the enemy" whenever Halle shoots the enemy. Once this is done, you should be able to open the JavaScript console and see the message whenever you shoot the enemy.
 
 The `game.increaseScore()` function lets you change the score of the game. Add this code to the function you just wrote
 
@@ -529,8 +543,8 @@ You should see your score increase when Halle shoots the enemy.
 
 Each game item has three built-in behaviors that you can call in response to events
 
-`fadeOut()` will cause the item to fadeout
-`shrink()` will cause the item to decrease in size out of existance
+`fadeOut()` will cause the item to disappear by fading out
+`shrink()` will cause the item to decrease in size out of existence
 `flyTo(x,y)` will cause the item to quickly move to a place on screen defined by `x` and `y`
 
 Try adding the following code to your function assigned to `enemy.onPlayerCollision`
@@ -551,13 +565,13 @@ function createEnemy() {
 }
 ```
 
-Introduce two parameters `x` and `y` into your function and the
+Introduce two parameters `x` and `y` into your function
 
 ```js
 function createEnemy(x,y) {
 ```
 
-and then use `x` and `y` in your function body to place the enemy in those locations.
+Then use `x` and `y` in your function body to place the enemy in those locations.
 
 You can now call the `createEnemy()` function multiple times to make many enemies.
 
@@ -567,9 +581,9 @@ createEnemy(800,groundY-100);
 createEnemy(1200,groundY-500);
 ```
 
-You should now have a working enemy for your game. Now you need to make it your own. Change the code in your `createEnemy` function to customize the enemy for your game. 
+Once you have written the code correctly you will have a working enemy for your game. Now you need to make it your own. Change the code in your `createEnemy` function to customize the enemy for your game. 
 
-Finally, add data for your enemies in `levelData.gameItems` and then modify your code to create enemies from that data. 
+Finally, add an object for your enemy locations in `levelData.gameItems` and then modify your code to create enemies from that data. 
 
 # Step 16 - Design A Reward
 
@@ -582,5 +596,4 @@ You've written your first game! Give yourself a chance to play with what you cre
 Any of the code in your game can be modified. Look around in the source code and try to understand it. You can read the documentation for [easel.js](http://www.createjs.com/docs/easeljs/modules/EaselJS.html) to draw more interesting shapes or [tween.js](http://www.createjs.com/tweenjs) to make interesting animations. 
 
 Good luck!
-
 
