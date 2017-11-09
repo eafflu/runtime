@@ -61,6 +61,13 @@ To include it you will want to add the following script to `index.html` in the `
 
 Find this file in your project and open it. You should see that it declares a function and assigns it to `window.opspark.makeHud`. Read the documentation for `makeHud` and follow it's instructions for adding the heads-up-display to the game. You will want to make a change to the code in `index.html` at `TODO 1`. Once that is done, you should see the heads-up display!
 
+Hint: The code to add will look like this:
+    
+    var hud = opspark.makeHud();
+    view.addChild(hud);
+
+It creates a Heads Up Display (HUD) using the opspark.makeHud() method and adds it to view.
+
 ![Heads-Up Display](http://i.imgur.com/VG1KvnA.png)
 
 Now, add one more line of code to `index.html` where you created your heads-up display.
