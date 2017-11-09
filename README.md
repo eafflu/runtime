@@ -80,6 +80,8 @@ By assigning the `hud` variable to a property on the `window` object, we can pla
 
 Open up the console in Chrome Developer Tools and type out each of these statements.
 
+Hint: To open the Chrome Developer Tools right click on the page and select 'inspect'
+
     hud.updateScore(10);
 
     hud.updateOf(1000);
@@ -109,18 +111,23 @@ Once this is done correctly you should see Halle on a yellow background.
 
 ![Halle On Yellow Background](http://i.imgur.com/iqo5v3F.png)
 
+# TODO
+Adjust the backgroundFill variable to a color you like and then change the second argument so that it only shows the background color above the the ground. 
+
+As a last step, depending on the background you've built, your heads-up-display may be hard to see or just plain ugly. Modify the colors used by `js/view/hud.js` to match your background.
+
 Our first goal is to create a great background for our game. That will require learning to draw with create.js.
 
-# Drawing With Create.js
-
+# INFO: Drawing With Create.js
+All drawing code for the background should go at `TODO: 3` in `js/view/background.js` within the `render()` function. 
 In order to draw something you will create a *shape* using one of the following functions:
 
 Image | Code
 ------|------
-![rect](http://i.imgur.com/gwbZLZl.png)    | `shape = draw.rect(width, height, color, strokeColor, strokeWidth);`
-![line](http://i.imgur.com/Zy8nY0C.png)   | `shape = draw.line(fromX, fromY, toX, toY, strokeColor, strokeWidth);`
-![circle](http://i.imgur.com/Zc9hJqU.png)    | `shape = draw.circle(radius, color, strokeColor, strokeWidth);`
-![image](http://i.imgur.com/BGZCnX8.png) `href='img/moon.png'`    | `shape = draw.bitmap(href);`
+![rect](http://i.imgur.com/gwbZLZl.png)    | `var shape = draw.rect(width, height, color, strokeColor, strokeWidth);`
+![line](http://i.imgur.com/Zy8nY0C.png)   | `var shape = draw.line(fromX, fromY, toX, toY, strokeColor, strokeWidth);`
+![circle](http://i.imgur.com/Zc9hJqU.png)    | `var shape = draw.circle(radius, color, strokeColor, strokeWidth);`
+![image](http://i.imgur.com/BGZCnX8.png) `var href='img/moon.png'`    | `var shape = draw.bitmap(href);`
 
 In order to make that shape show on sreen you will need to add that shape to the `background` by calling
 
@@ -144,14 +151,9 @@ We've defined a couple of variables that should help you draw shapes in the righ
 See the [opspark-draw documentation](https://libraries.io/bower/opspark-draw) for more details on drawing functions you can use or look at the source directly in your project at `bower_components/opspark-draw/draw.js`. You can also use anything in the [create.js API](http://www.createjs.com/docs/easeljs/modules/EaselJS.html).
 
 # Step 5 - Create Your Own Background
-
-Create a great background for your game. With the draw functions provided and your JavaScript knowledge, you can create almost anything.
-
 All drawing code for the background should go at `TODO: 3` in `js/view/background.js` within the `render()` function. 
 
-Start by adjusting the background to a color you like and then fix the code so that it only shows the background color above the the ground. 
-
-As a last step, depending on the background you've built, your heads-up-display may be hard to see or just plain ugly. Modify the colors used by `src/view/hud.js` to match your background.
+Create a great background for your game. With the draw functions provided and your JavaScript knowledge, you can create almost anything.
 
 If you need some inspiration, here are some things to try:
 
@@ -193,7 +195,7 @@ Try moving the moon to a good location for your game.
 Try changing the size of the moon by changing the moon's `scaleX` and `scaleY` properties
 
 
-# Animation
+# INFO: Animation
 
 create.js allows us to perform animation in our game. If you look in the upper left-hand corner of the game, you will see something like "57 fps". That means the game is running at 57 frames-per-second. Each "frame" is one drawing of our game and so we are redrawing the game 57 times every second. By making slight changes to what we draw over time we can give the illusion of motion. 
 
@@ -230,7 +232,7 @@ You should now see the box moving. What happened? Why is it doing that? Make sur
 
 **Change the code so that the box moves towards Halle**
 
-# Parallax
+# INFO: Parallax
 
 ![Parallax](http://www.hallme.com/uploads/parallax-scrolling-mario.gif)
 
@@ -562,7 +564,7 @@ enemy.fadeOut();
 
 Now use one of the behavior functions described above in the function assigned to `enemy.onProjectileCollision` to make the enemy disappear whenever Halle shoots it.
 
-# Step 15 - Design An Enemy
+# Step 15 Part 2 - Design An Enemy
 
 You now should know enough to make your own enemy. To get started, take all of the code you wrote in the last step and move it into a new function called `createEnemy`
 
