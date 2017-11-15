@@ -129,6 +129,12 @@ Image | Code
 ![circle](http://i.imgur.com/Zc9hJqU.png)    | `var shape = draw.circle(radius, color, strokeColor, strokeWidth);`
 ![image](http://i.imgur.com/BGZCnX8.png) `var href='img/moon.png'`    | `var shape = draw.bitmap(href);`
 
+**Adding your own Images**
+The moon.png image is stored in the img folder. You can add your own custom images too! Once you have found the image you would like to add (you can easily find png pictures by adding .png to your google image search) you can upload that file to your cloud9 workspace. 
+- Go to File -> Upload Local Files -> Select / Drag & Drop downloaded image. 
+- Move that image into the img folder
+- use 'img/<name of your picture>' for the href
+
 In order to make that shape show on sreen you will need to add that shape to the `background` by calling
 
     background.addChild(shape);
