@@ -112,6 +112,8 @@ Once this is done correctly you should see Halle on a yellow background.
 ![Halle On Yellow Background](http://i.imgur.com/iqo5v3F.png)
 
 # TODO
+Open up `js/view/background.js`
+
 Adjust the backgroundFill variable to a color you like and then change the second argument so that it only shows the background color above the the ground. 
 
 As a last step, depending on the background you've built, your heads-up-display may be hard to see or just plain ugly. Modify the colors used by `js/view/hud.js` to match your background.
