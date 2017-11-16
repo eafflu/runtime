@@ -112,7 +112,7 @@ Once this is done correctly you should see Halle on a yellow background.
 ![Halle On Yellow Background](http://i.imgur.com/iqo5v3F.png)
 
 # TODO
-Open up `js/view/background.js`
+Open up `js/view/background.js` and find the variable backgroundFill on (or around) line 36.
 
 Adjust the backgroundFill variable to a color you like and then change the second argument so that it only shows the background color above the the ground. 
 
