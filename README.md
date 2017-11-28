@@ -129,7 +129,7 @@ Image | Code
 ![rect](http://i.imgur.com/gwbZLZl.png)    | `var shape = draw.rect(width, height, color, strokeColor, strokeWidth);`
 ![line](http://i.imgur.com/Zy8nY0C.png)   | `var shape = draw.line(fromX, fromY, toX, toY, strokeColor, strokeWidth);`
 ![circle](http://i.imgur.com/Zc9hJqU.png)    | `var shape = draw.circle(radius, color, strokeColor, strokeWidth);`
-![image](http://i.imgur.com/BGZCnX8.png) `var href='img/moon.png'`    | `var shape = draw.bitmap(href);`
+![image](http://i.imgur.com/BGZCnX8.png)     | `var shape = draw.bitmap('img/moon.png');`
 
 **Adding your own Images**
 The moon.png image is stored in the img folder. You can add your own custom images too! Once you have found the image you would like to add (you can easily find png pictures by adding .png to your google image search) you can upload that file to your cloud9 workspace. 
@@ -140,6 +140,8 @@ The moon.png image is stored in the img folder. You can add your own custom imag
 In order to make that shape show on sreen you will need to add that shape to the `background` by calling
 
     background.addChild(shape);
+
+**NOTE: Make sure to add any shapes *below* where you add the backgroundFill to your background. The order that you add shapes to your background matters!**
 
 Your shape will be created so that it appears at the upper-left hand corner of the screen, at `(0,0)` in your game's coordinate system, but you can place a shape anywhere on the screen by setting it's `x` and `y` properties.
     
@@ -160,6 +162,8 @@ See the [opspark-draw documentation](https://libraries.io/bower/opspark-draw) fo
 
 # Step 5 - Create Your Own Background
 All drawing code for the background should go at `TODO: 3` in `js/view/background.js` within the `render()` function. 
+
+**NOTE: The order that you add shapes to your background matters so be sure to add any additional shapes *below* where you add backgroundFill to the background.**
 
 Create a great background for your game. With the draw functions provided and your JavaScript knowledge, you can create almost anything.
 
