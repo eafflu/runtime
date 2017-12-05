@@ -121,7 +121,8 @@ As a last step, depending on the background you've built, your heads-up-display 
 Our first goal is to create a great background for our game. That will require learning to draw with create.js.
 
 # INFO: Drawing With Create.js
-All drawing code for the background should go at `TODO: 3` in `js/view/background.js` within the `render()` function. 
+Create.js is a library of functions that let you add drawings to your program. 
+
 In order to draw something you will create a *shape* using one of the following functions:
 
 Image | Code
@@ -244,14 +245,6 @@ You should now see the box moving. What happened? Why is it doing that? Make sur
 
 **Change the code so that the box moves towards Halle**
 
-# INFO: Parallax
-
-![Parallax](http://www.hallme.com/uploads/parallax-scrolling-mario.gif)
-
-Parallax is a technique in animation for giving the illusion of depth. When you are moving, things that are close to you move quickly whereas things that are very far away may move slowly or not appear to move at all. We can use this technique in our game to create visually interesting backgrounds. 
-
-# Step 8 - Creating a Parallax Effect
-
 Try adding the following code to `update()`
 
 ```js
@@ -262,11 +255,7 @@ if(backgroundBox.x < -100) {
 
 What is going on here?
 
-We can take this technique one step further by applying it to *many* boxes. 
-
-Go ahead and remove your `backgroundBox` from the screen by commenting out this line of code
-
-    // background.addChild(backgroundBox);
+# Step 8 - Creating a Parallax Effect
 
 After the declaration of `backgroundBox` declare a variable `buildings` and assign it an empty array.
 
@@ -294,7 +283,19 @@ Make sure you understand what each line of this code does. Change how the buildi
 
 ![Halle With Buildings With Background](http://i.imgur.com/kyeRy7x.png)
 
-Now, write code in `update()` that animates the boxes so that they move towards Halle. Use the technique we applied to `backgroundBox` to make the buildings continually appear in the game as Halle walks. 
+# INFO: Parallax
+
+![Parallax](http://www.hallme.com/uploads/parallax-scrolling-mario.gif)
+
+Parallax is a technique in animation for giving the illusion of depth. When you are moving, things that are close to you move quickly whereas things that are very far away may move slowly or not appear to move at all. We can use this technique in our game to create visually interesting backgrounds. 
+
+# TODO
+
+Now, write code in `update()` that animates the buildings so that they move towards Halle. How can you move all of the buildings in the buildings array? Use the technique we applied to `backgroundBox` to make the buildings continually appear in the game as Halle walks. 
+
+How can you change your code such that the buildings and the box move at different speeds?
+
+Change your building / box drawings to something unique!
 
 # Step 9 - Setting Up Gameplay
 
