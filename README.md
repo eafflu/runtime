@@ -114,7 +114,10 @@ Once this is done correctly you should see Halle on a yellow background.
 # TODO
 Open up `js/view/background.js` and find the variable backgroundFill on (or around) line 36.
 
-Adjust the backgroundFill variable to a color you like and then change the second argument so that it only shows the background color above the the ground. 
+backgroundFill is set to the rectangle returned by the draw.rect() function (see below). Let's make some changes to the function call to get our background filled in just right:
+- Adjust the backgroundFill variable to a color you like.
+- Adjust second argument so that it only shows the background color above the the ground.
+    - HINT: use the value groundY
 
 As a last step, depending on the background you've built, your heads-up-display may be hard to see or just plain ugly. Modify the colors used by `js/view/hud.js` to match your background.
 
@@ -133,12 +136,13 @@ Image | Code
 ![image](http://i.imgur.com/BGZCnX8.png)     | `var shape = draw.bitmap('img/moon.png');`
 
 **Adding your own Images**
-The moon.png image is stored in the img folder. You can add your own custom images too! Once you have found the image you would like to add (you can easily find png pictures by adding .png to your google image search) you can upload that file to your cloud9 workspace. 
+The moon.png image is stored in the img folder. You can add your own custom images too! Once you have downloaded the image you would like to add (you can easily find png pictures by adding .png to your google image search) you can upload that file to your cloud9 workspace. 
+- Select the img folder
 - Go to File -> Upload Local Files -> Select / Drag & Drop downloaded image. 
 - Move that image into the img folder
-- use 'img/<name of your picture>' for the href
+- use 'img/<name of your picture.png>' for the href
 
-In order to make that shape show on sreen you will need to add that shape to the `background` by calling
+In order to make your shape show on sreen you will need to add it to the `background` by calling
 
     background.addChild(shape);
 
@@ -181,7 +185,7 @@ var circle;
 for(var i=0;i<100;i++) {
     circle = draw.circle(10,'white','LightGray',2);
     circle.x = canvasWidth*Math.random();
-    circle.y = canvasHeight*Math.random();
+    circle.y = groundY*Math.random();
     background.addChild(circle);
 }
 ```
@@ -216,11 +220,11 @@ We don't have to completely re-create our game 57 times a second. Instead, we ca
 
 # Step 6 - Create a box
 
-To illustrate this, let's draw a box on the screen. We will call it `backgroundBox`. In `background.js`, declare a variable `backgroundBox` directly after the `background` variable declaration.
+To illustrate this, let's draw a box on the screen. We will call it `backgroundBox`. Towards the top of `background.js`, declare a variable `backgroundBox` directly after the `background` variable declaration.
 
     var backgroundBox;
 
-Then in the `render()` function, store a rectangle in `backgroundBox` and add it to the background
+Then in the `render` function, store a rectangle in `backgroundBox` and add it to the background
 
 ```js
 backgroundBox = draw.rect(100,100,'Blue');
@@ -291,7 +295,9 @@ Parallax is a technique in animation for giving the illusion of depth. When you 
 
 # TODO
 
-Now, write code in `update()` that animates the buildings so that they move towards Halle. How can you move all of the buildings in the buildings array? Use the technique we applied to `backgroundBox` to make the buildings continually appear in the game as Halle walks. 
+Now, write code in `update()` that animates the buildings so that they move towards Halle:
+- How can you move all of the buildings in the buildings array? 
+- Use the technique we applied to `backgroundBox` to make the buildings continually appear in the game as Halle walks. 
 
 How can you change your code such that the buildings and the box move at different speeds?
 
