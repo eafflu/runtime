@@ -406,13 +406,16 @@ Call `createSawBlade()` three times with different `x` and `y` arguments in orde
 
 # Step 12 - Level Data
 
-In a professional game, the programmers write the code for a game engine which runs on data which is built by game designers. This data, as well as all of the artwork, defines the entire world of the game. Separating the game code from the data allows you to easily modify the behavior and gameplay of the game without actually modifying the code. 
+In a professional game, the programmers write the code for a game engine which runs on data which is built by game designers. 
+This data, as well as all of the artwork, defines the entire world of the game. Separating the game code from the data allows you to easily modify the behavior and gameplay of the game without actually modifying the code. 
 
-Look at the `levelData` variable in `js/level01.js`, you should see three objects in the `gameItems` property. 
+Look at the `levelData` variable in `js/level01.js`, you should see three objects in the `gameItems` array property. 
 
-Delete your calls to the `createSawBlade` function and replace them with code that uses the data from the `gameItems` property of `levelData` to define where the saw blades are placed. Use the Array [forEach](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach) function. 
+Each of these `gameItems` objects has an `x` and `y` property which will tell us where to place our obstacles. Using a for-loop, iterate through this array and, for each object, create an obstacle using that object's x and y property.
 
-Add a couple more saw blades to your game.
+You can also try using the Array [forEach](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach) function. Check out this video for some help: https://www.youtube.com/watch?v=159EAISAxwg
+
+Add a couple more saw blades to your game, now by modifying the `levelData.gameItems` array.
 
 ![Lots Of saw blades](https://i.imgur.com/HXJtMAN.png)
 
