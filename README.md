@@ -166,7 +166,7 @@ We've defined a couple of variables that should help you draw shapes in the righ
 See the [opspark-draw documentation](https://libraries.io/bower/opspark-draw) for more details on drawing functions you can use or look at the source directly in your project at `bower_components/opspark-draw/draw.js`. You can also use anything in the [create.js API](http://www.createjs.com/docs/easeljs/modules/EaselJS.html).
 
 # Step 5 - Create Your Own Background
-All drawing code for the background should go at `TODO: 3` in `js/view/background.js` within the `render()` function. 
+All drawing code for the background should go at `TODO: 5` in `js/view/background.js` within the `render()` function. 
 
 **NOTE: The order that you add shapes to your background matters so be sure to add any additional shapes *below* where you add backgroundFill to the background.**
 
