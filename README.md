@@ -466,7 +466,7 @@ function createObstacle(radius,damage) {
 
 `createObstacle()` calls `createGameItem()`, sets a couple of properties on the returned object, and then returns that same object. This provides a clue as to how we might work with the code. We are going to be calling `createGameItem()` for the rest of the tutorial instead of `createObstacle()`. Let's try it out and see what it can do.
 
-We will be adding all of the code to `js/level0.js`. Before we begin, find the call to `game.setDebugMode()` and change the argument to `true` in order to show the hitzones.
+We will be adding all of the code to `js/level01.js`. Before we begin, find the call to `game.setDebugMode()` and change the argument to `true` in order to show the hitzones.
 
 We are going to create a new game item similar to how we created our other obstacles. Add the following code:
 
