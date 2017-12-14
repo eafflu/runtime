@@ -29,12 +29,19 @@
 
             background.removeAllChildren();
 
-            // TODO: 3 - YOUR DRAW CODE GOES HERE
-
             // this fills the background with a obnoxious yellow
             // you should modify this to suit your game
             var backgroundFill = draw.rect(canvasWidth,canvasHeight,'yellow');
             background.addChild(backgroundFill);
+            
+            // TODO: 5 - Add a moon and starfield
+            
+            
+            // TODO: 6 - Add a box
+            
+            
+            // TODO: 8 - Add buildings!
+            
         }
         
         // Perform background animation
@@ -44,6 +51,8 @@
             var canvasWidth = app.canvas.width;
             var canvasHeight = app.canvas.height;
             var groundY = ground.y;
+            
+            // TODO: 7 - Move the box!
 
         }
 
