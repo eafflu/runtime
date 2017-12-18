@@ -586,7 +586,7 @@ enemy.fadeOut();
 
 Now use one of the behavior functions described above in the function assigned to `enemy.onProjectileCollision` to make the enemy disappear whenever Halle shoots it.
 
-# Step 15 Part 2 - Design An Enemy
+# Step 16 - Design An Enemy
 
 You now should know enough to make your own enemy. To get started, take all of the code you wrote in the last step and move it into a new function called `createEnemy`
 
@@ -616,7 +616,7 @@ Once you have completed this step, you will have a working enemy for your game. 
 
 Finally, add an object for your enemy locations in `levelData.gameItems` and then modify your code to create enemies from that data. 
 
-# Step 16 - Design A Reward
+# Step 17 - Design A Reward
 
 Create a new game item that is neither enemy nor obstacle. The game item should be positioned such that Halle must jump to be able to reach it. When she collides with it, it should disappear and the score should be increased. 
 
