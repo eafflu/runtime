@@ -453,20 +453,24 @@ Obstacles are only one kind of thing you might find in a game. In most games, yo
 If you look in `src/js/game.js` at the `createObstacle()` function, you will see the following code:
 
 ```js
-function createObstacle(radius,damage) {
-    var gameItem = createGameItem('obstacle',radius);
-    gameItem.velocityX = -2;
-
-    gameItem.onPlayerCollision = function() {
-        changeIntegrity(-damage);
-    };
-    return gameItem;
-}
+1   function createObstacle(radius,damage) {
+2       var gameItem = createGameItem('obstacle',radius);
+3       gameItem.velocityX = -2;
+4
+5       gameItem.onPlayerCollision = function() {
+6           changeIntegrity(-damage);
+7       };
+8       return gameItem;
+9   }
 ```
 
-`createObstacle()` calls `createGameItem()`, sets a couple of properties on the returned object, and then returns that same object. This provides a clue as to how we might work with the code. We are going to be calling `createGameItem()` for the rest of the tutorial instead of `createObstacle()`. Let's try it out and see what it can do.
+Let's break this down by line:
 
-We will be adding all of the code to `js/level01.js`. Before we begin, find the call to `game.setDebugMode()` and change the argument to `true` in order to show the hitzones.
+On line 2 `createObstacle()` calls `createGameItem()` with the parameters `'obstacle'` and `radius` and stores the returned object in `gameItem`. Then on on lines 3 through 7 the function sets a couple of properties on `gameItem`, and then returns that same object on line 8.This provides a clue as to how we might work with the code. 
+
+We are going to be calling `createGameItem()` for the rest of the tutorial instead of `createObstacle()`. Let's try it out and see what it can do.
+
+**We will be adding all of the code to `js/level01.js`**. Before we begin, find the call to `game.setDebugMode()` and change the argument to `true` in order to show the hitzones.
 
 We are going to create a new game item similar to how we created our other obstacles. Add the following code:
 
