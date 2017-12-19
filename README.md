@@ -622,7 +622,17 @@ Finally, add an object for your enemy locations in `levelData.gameItems` and the
 
 # Step 17 - Design A Reward
 
-Create a new game item that is neither enemy nor obstacle. The game item should be positioned such that Halle must jump to be able to reach it. When she collides with it, it should disappear and the score should be increased. 
+Now that we have Obstacles and Enemies - we need a reward for HalleBot to get!
+
+This reward will be an obstacle with a few special properties:
+- It should be positioned such that Halley must jump to be able to reach it
+- When HalleBot collides with it, it should disappear and the score should be increased
+- Anything else you would like to happen!
+
+```js
+var rewardSize = 25;
+var reward = game.createObstacle(rewardSize, 0);
+```
 
 # Congratulations
 
