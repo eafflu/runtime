@@ -409,9 +409,17 @@ Call `createSawBlade()` three times with different `x` and `y` arguments in orde
 In a professional game, the programmers write the code for a game engine which runs on data which is built by game designers. 
 This data, as well as all of the artwork, defines the entire world of the game. Separating the game code from the data allows you to easily modify the behavior and gameplay of the game without actually modifying the code. 
 
-Look at the `levelData` variable in `js/level01.js`, you should see three objects in the `gameItems` array property. 
+Look at the `levelData` variable in `js/level01.js`, you should see the `gameItems` array property. `levelData.gameItems` is an *array of objects*. You should see three objects, each with a `.type` property and an `.x` and `.y` property that will tell us where to place our obstacles. 
 
-Each of these `gameItems` objects has an `x` and `y` property which will tell us where to place our obstacles. Using a for-loop, iterate through this array and, for each object, create an obstacle using that object's x and y property.
+Using a for-loop, iterate through this array and, for each object, create an obstacle using that object's `.x` and `.y` property. Your code will look like this:
+
+```js
+var gameItem;
+for (iterate through levelData.gameItems) {
+   gameItem = ???
+    // Create a sawblade using the .x and .y property of gameItem
+}
+```
 
 You can also try using the Array [forEach](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach) function. Check out this video for some help: https://www.youtube.com/watch?v=159EAISAxwg
 
@@ -443,8 +451,7 @@ Then, modify `levelData` to add additional obstacles with that type. Here is an 
 {type: 'box',x:100,y:200}
 ```
 
-
-Finally, modify your function that you pass into `forEach()` to handle that new type of obstacle. 
+Finally, modify your `levelData.gameItems` loop to handle that new type of obstacle. What property of `gameItem` can you use to choose which type of gameItem you'll create?
 
 # Step 14 - Enemies!
 
@@ -624,15 +631,10 @@ Finally, add an object for your enemy locations in `levelData.gameItems` and the
 
 Now that we have Obstacles and Enemies - we need a reward for HalleBot to get!
 
-This reward will be an obstacle with a few special properties:
+This reward will be a gameItem with a few special properties:
 - It should be positioned such that Halley must jump to be able to reach it
 - When HalleBot collides with it, it should disappear and the score should be increased
 - Anything else you would like to happen!
-
-```js
-var rewardSize = 25;
-var reward = game.createObstacle(rewardSize, 0);
-```
 
 # Congratulations
 
