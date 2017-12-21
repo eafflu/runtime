@@ -620,7 +620,7 @@ You can now call the `createEnemy()` function multiple times to make several ene
 ```
 createEnemy(400,groundY-10);
 createEnemy(800,groundY-100);
-createEnemy(1200,groundY-500);
+createEnemy(1200,groundY-50);
 ```
 
 Once you have completed this step, you will have a working enemy for your game. Now you need to make it your own. Change the code in your `createEnemy` function to customize the enemy for **your** game. 
