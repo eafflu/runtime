@@ -5,7 +5,47 @@ Meet Halle, the official Operation Spark robot.
 
 ![Halle](http://i.imgur.com/yUKA9EN.gif)
 
-Halle has some cool moves but nobody to play with. Let's build our own game using Halle!
+Halle has some cool moves but nobody to play with. Let's build our own game using Halle! To do so we will be using the Create.js library's draw functions:
+
+# INFO: Drawing With Create.js
+Create.js is a library of functions that let you add drawings to your program. 
+
+In order to draw something you will create a *shape* using one of the following functions:
+
+Image | Code
+------|------
+![rect](http://i.imgur.com/gwbZLZl.png)    | `var shape = draw.rect(width, height, color, strokeColor, strokeWidth);`
+![line](http://i.imgur.com/Zy8nY0C.png)   | `var shape = draw.line(fromX, fromY, toX, toY, strokeColor, strokeWidth);`
+![circle](http://i.imgur.com/Zc9hJqU.png)    | `var shape = draw.circle(radius, color, strokeColor, strokeWidth);`
+![image](http://i.imgur.com/BGZCnX8.png)     | `var shape = draw.bitmap('img/moon.png');`
+
+**Adding your own Images**
+The moon.png image is stored in the img folder. You can add your own custom images too! Once you have downloaded the image you would like to add (you can easily find png pictures by adding .png to your google image search) you can upload that file to your cloud9 workspace. 
+- Select the img folder
+- Go to File -> Upload Local Files -> Select / Drag & Drop downloaded image. 
+- Move that image into the img folder
+- use 'img/<name of your picture.png>' for the href
+
+In order to make your shape show on sreen you will need to add it to the `background` by calling
+
+    background.addChild(shape);
+
+Your shape will be created so that it appears at the upper-left hand corner of the screen, at `(0,0)` in your game's coordinate system, but you can place a shape anywhere on the screen by setting it's `x` and `y` properties.
+    
+    shape.x = 100;
+    shape.y = 45;
+
+Remember that `x` and `y` refer to a coordinate system which has an origin (0,0) in the upper-left hand corner. `x` becomes larger as you move to the right. `y` becomes larger as you move downward.
+
+![cartesion coordinate system](http://i.imgur.com/jyZuFer.png)
+
+We've defined a couple of variables that should help you draw shapes in the right place.
+
+`canvasWidth` is the total width of the game screen  
+`canvasHeight` is the total height of the game screen  
+`groundY` is the y coordinate of the ground line  
+
+See the [opspark-draw documentation](https://libraries.io/bower/opspark-draw) for more details on drawing functions you can use or look at the source directly in your project at `bower_components/opspark-draw/draw.js`. You can also use anything in the [create.js API](http://www.createjs.com/docs/easeljs/modules/EaselJS.html).
 
 # Step 1 - Getting Started
 
@@ -111,7 +151,7 @@ Once this is done correctly you should see Halle on a yellow background.
 
 ![Halle On Yellow Background](http://i.imgur.com/iqo5v3F.png)
 
-# TODO
+#### Instructions
 Open up `js/view/background.js` and find the variable backgroundFill on (or around) line 36.
 
 backgroundFill is set to the rectangle returned by the draw.rect() function (see below). Let's make some changes to the function call to get our background filled in just right:
@@ -122,48 +162,6 @@ backgroundFill is set to the rectangle returned by the draw.rect() function (see
 As a last step, depending on the background you've built, your heads-up-display may be hard to see or just plain ugly. Modify the colors used by `js/view/hud.js` to match your background.
 
 Our first goal is to create a great background for our game. That will require learning to draw with create.js.
-
-# INFO: Drawing With Create.js
-Create.js is a library of functions that let you add drawings to your program. 
-
-In order to draw something you will create a *shape* using one of the following functions:
-
-Image | Code
-------|------
-![rect](http://i.imgur.com/gwbZLZl.png)    | `var shape = draw.rect(width, height, color, strokeColor, strokeWidth);`
-![line](http://i.imgur.com/Zy8nY0C.png)   | `var shape = draw.line(fromX, fromY, toX, toY, strokeColor, strokeWidth);`
-![circle](http://i.imgur.com/Zc9hJqU.png)    | `var shape = draw.circle(radius, color, strokeColor, strokeWidth);`
-![image](http://i.imgur.com/BGZCnX8.png)     | `var shape = draw.bitmap('img/moon.png');`
-
-**Adding your own Images**
-The moon.png image is stored in the img folder. You can add your own custom images too! Once you have downloaded the image you would like to add (you can easily find png pictures by adding .png to your google image search) you can upload that file to your cloud9 workspace. 
-- Select the img folder
-- Go to File -> Upload Local Files -> Select / Drag & Drop downloaded image. 
-- Move that image into the img folder
-- use 'img/<name of your picture.png>' for the href
-
-In order to make your shape show on sreen you will need to add it to the `background` by calling
-
-    background.addChild(shape);
-
-**NOTE: Make sure to add any shapes *below* where you add the backgroundFill to your background. The order that you add shapes to your background matters!**
-
-Your shape will be created so that it appears at the upper-left hand corner of the screen, at `(0,0)` in your game's coordinate system, but you can place a shape anywhere on the screen by setting it's `x` and `y` properties.
-    
-    shape.x = 100;
-    shape.y = 45;
-
-Remember that `x` and `y` refer to a coordinate system which has an origin (0,0) in the upper-left hand corner. `x` becomes larger as you move to the right. `y` becomes larger as you move downward.
-
-![cartesion coordinate system](http://i.imgur.com/jyZuFer.png)
-
-We've defined a couple of variables that should help you draw shapes in the right place.
-
-`canvasWidth` is the total width of the game screen  
-`canvasHeight` is the total height of the game screen  
-`groundY` is the y coordinate of the ground line  
-
-See the [opspark-draw documentation](https://libraries.io/bower/opspark-draw) for more details on drawing functions you can use or look at the source directly in your project at `bower_components/opspark-draw/draw.js`. You can also use anything in the [create.js API](http://www.createjs.com/docs/easeljs/modules/EaselJS.html).
 
 # Step 5 - Create Your Own Background
 All drawing code for the background should go at `TODO: 5` in `js/view/background.js` within the `render()` function. 
