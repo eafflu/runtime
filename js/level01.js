@@ -1,4 +1,5 @@
-(function (window) {
+var level01 = function (window) {
+
     window.opspark = window.opspark || {};
 
     var draw = window.opspark.draw;
@@ -20,7 +21,7 @@
                 {type: 'sawblade',x:900,y:groundY}
             ]
         };
-
+        window.levelData = levelData;
         // set this to true or false depending on if you want to see hitzones
         game.setDebugMode(true);
 
@@ -28,4 +29,11 @@
 
 
     }
-})(window);
+};
+
+// DON'T REMOVE THIS CODE //////////////////////////////////////////////////////
+if((typeof process !== 'undefined') &&
+    (typeof process.versions.node !== 'undefined')) {
+    // here, export any references you need for tests //
+    module.exports = level01;
+}

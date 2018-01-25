@@ -1,4 +1,4 @@
-(function (window) {
+var background = function (window) {
     'use strict';
     
     window.opspark = window.opspark || {};
@@ -66,4 +66,11 @@
         render();
         return background;
     };
-}(window));
+};
+
+// DON'T REMOVE THIS CODE //////////////////////////////////////////////////////
+if((typeof process !== 'undefined') &&
+    (typeof process.versions.node !== 'undefined')) {
+    // here, export any references you need for tests //
+    module.exports = background;
+}
