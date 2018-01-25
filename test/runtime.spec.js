@@ -1,7 +1,6 @@
 // mock a global window object //
 
 const
-    _ = require('lodash'),
     expect = require('chai').expect,
     sinon = require('sinon'),
     cheerio = require('cheerio'),
