@@ -47,7 +47,7 @@ We've defined a couple of variables that should help you draw shapes in the righ
 
 See the [opspark-draw documentation](https://libraries.io/bower/opspark-draw) for more details on drawing functions you can use or look at the source directly in your project at `bower_components/opspark-draw/draw.js`. You can also use anything in the [create.js API](http://www.createjs.com/docs/easeljs/modules/EaselJS.html).
 
-# Step 1 - Getting Started
+# TODO 1 - Getting Started
 
 Install this project into your Cloud9 workspace by typing `opspark install` into a terminal and choosing the `runtime` project.
 
@@ -81,7 +81,7 @@ Some of the scripts are *library* or *third-party* code. This is code that other
 
 For this project, we will be using the [create.js](http://createjs.com/) library to draw and animate our game. 
 
-# Step 2 - Brainstorming
+# TODO 2 - Brainstorming
 
 Before we start coding, we have to decide what kind of game we want to build with Halle. Look at the kind of moves that Halle can make and imagine how they would fit into **your** game. 
 
@@ -91,15 +91,11 @@ What are the *game mechanics*? What are the goals and what are the challenges? W
 
 Finally, come up with a good *name* for your game. Having a great name for a project is an important step, but don't worry, you can always change it later. 
 
-# Step 3 - Adding The Heads-Up Display
+# TODO 3 - Adding The Heads-Up Display
 
 Most games display *status information* like the current score or number of lives remaining overlaid with the running game at either the top or bottom of the screen. We call this a "Heads-Up Display" and we've already written one for you in `js/view/hud.js`
 
-To include it you will want to add the following script to `index.html` in the `<head>` element underneath the commment that says `<!-- add any additional scripts here -->` 
-
-    <script src="js/view/hud.js"></script>
-
-Find this file in your project and open it. You should see that it declares a function and assigns it to `window.opspark.makeHud`. Read the documentation for `makeHud` and follow it's instructions for adding the heads-up-display to the game. You will want to make a change to the code in `index.html` at `TODO 1`. Once that is done, you should see the heads-up display!
+Find this file in your project and open it. You should see that it declares a function and assigns it to `window.opspark.makeHud`. Read the documentation for `makeHud` and follow it's instructions for adding the heads-up-display to the game. You will want to make a change to the code in `init.js` at `TODO 3`. Once that is done, you should see the heads-up display!
 
 Hint: The code to add will look like this:
     
@@ -110,7 +106,7 @@ It creates a Heads Up Display (HUD) using the opspark.makeHud() method and adds 
 
 ![Heads-Up Display](http://i.imgur.com/VG1KvnA.png)
 
-Now, add one more line of code to `index.html` where you created your heads-up display.
+Now, add one more line of code to `init.js` where you created your heads-up display.
 
     window.hud = hud;
 
@@ -134,13 +130,9 @@ Hint: To open the Chrome Developer Tools right click on the page and select 'ins
 
 **What do they do?**
 
-# Step 4 - Adding A Background 
+# TODO 4 - Adding A Background 
 
-Include the script `js/view/background.js` by adding the following code to the `<head>` element of `index.html`
-
-    <script src="js/view/background.js"></script>
-
-Modify `index.html` at `TODO 2` to call our newly included code. You will need to supply the appropriate arguments to the function. 
+Modify `init.js` at `TODO 4` to call our newly included code. You will need to supply the appropriate arguments to the function. 
 
 ```js
 var background = opspark.makeBackground(app,ground);
@@ -151,19 +143,17 @@ Once this is done correctly you should see Halle on a yellow background.
 
 ![Halle On Yellow Background](http://i.imgur.com/iqo5v3F.png)
 
-#### Instructions
-Open up `js/view/background.js` and find the variable backgroundFill on (or around) line 36.
+Now, open up `js/view/background.js` and find the variable backgroundFill on (or around) line 36.
 
-backgroundFill is set to the rectangle returned by the draw.rect() function (see below). Let's make some changes to the function call to get our background filled in just right:
+backgroundFill is assigned the rectangle returned by the draw.rect() function (see below). Let's make some changes to the function call to get our background filled in just right:
 - Adjust the backgroundFill variable to a color you like.
 - Adjust second argument so that it only shows the background color above the the ground.
-    - HINT: use the value groundY
 
 As a last step, depending on the background you've built, your heads-up-display may be hard to see or just plain ugly. Modify the colors used by `js/view/hud.js` to match your background.
 
 Our first goal is to create a great background for our game. That will require learning to draw with create.js.
 
-# Step 5 - Create Your Own Background
+# TODO 5 - Create Your Own Background
 All drawing code for the background should go at `TODO: 5` in `js/view/background.js` within the `render()` function. 
 
 **NOTE: The order that you add shapes to your background matters so be sure to add any additional shapes *below* where you add backgroundFill to the background.**
@@ -216,7 +206,7 @@ create.js allows us to perform animation in our game. If you look in the upper l
 
 We don't have to completely re-create our game 57 times a second. Instead, we can setup a scene and then make slight modifications to it over time. In `background.js`, the `render()` function sets up our scene and the `update()` function is called once per frame. Whatever changes we make to the scene are drawn on the next frame. 
 
-# Step 6 - Create a box
+# TODO 6 - Create a box
 
 To illustrate this, let's draw a box on the screen. We will call it `backgroundBox`. Towards the top of `background.js`, declare a variable `backgroundBox` directly after the `background` variable declaration.
 
@@ -235,7 +225,7 @@ You should now see a blue box in your background. Change the values of `backgrou
 
 ![Halle and Blue Box](http://i.imgur.com/hDCmj47.png)
 
-# Step 7 - Animating The Box
+# TODO 7 - Animating The Box
 
 We can perform animation by making changes to our scene in the `update()` function. Remember that it is called once for each frame of the game.
 
@@ -257,7 +247,13 @@ if(backgroundBox.x < -100) {
 
 What is going on here?
 
-# Step 8 - Creating a Parallax Effect
+# INFO: Parallax
+
+![Parallax](http://www.hallme.com/uploads/parallax-scrolling-mario.gif)
+
+Parallax is a technique in animation for giving the illusion of depth. When you are moving, things that are close to you move quickly whereas things that are very far away may move slowly or not appear to move at all. We can use this technique in our game to create visually interesting backgrounds. 
+
+# TODO 8 - Creating a Parallax Effect
 
 After the declaration of `backgroundBox` declare a variable `buildings` and assign it an empty array.
 
@@ -285,13 +281,7 @@ Make sure you understand what each line of this code does. Change how the buildi
 
 ![Halle With Buildings With Background](http://i.imgur.com/kyeRy7x.png)
 
-# INFO: Parallax
-
-![Parallax](http://www.hallme.com/uploads/parallax-scrolling-mario.gif)
-
-Parallax is a technique in animation for giving the illusion of depth. When you are moving, things that are close to you move quickly whereas things that are very far away may move slowly or not appear to move at all. We can use this technique in our game to create visually interesting backgrounds. 
-
-# TODO
+# TODO 8 Part 2
 
 Now, write code in `update()` that animates the buildings so that they move towards Halle:
 - How can you move all of the buildings in the buildings array? 
@@ -301,7 +291,7 @@ How can you change your code such that the buildings and the box move at differe
 
 Change your building / box drawings to something unique!
 
-# Step 9 - Setting Up Gameplay
+# TODO 9 - Setting Up Gameplay
 
 You've created a rad background and are now ready to move on to gameplay. You'll be coding up and designing some game elements which Halle can interact with. The game manager provides an API for creating objects which move around the screen and can be run into, jumped over, or shot with Halle's gun. 
 
@@ -325,7 +315,7 @@ Open up `js/level01.js` file in your editor. You should see this:
 
 This file is where we are going to be writing our code for the next couple of steps.
 
-# Step 10 - Creating Your First Obstacle
+# TODO 10 - Creating Your First Obstacle
 
 An obstacle is the simplest element in our game. It moves at a fixed speed toward Halle as the game progresses. The obstacle must be avoided by either jumping or ducking and cannot be destroyed by being shot with Halle's gun. If the obstacle collides with Halle, Halle takes damage. If Halle takes enough damage, she dies and the game is over. 
 
@@ -386,7 +376,7 @@ In `index.html` change the `debugHalleHitZones` variable to false.
 
 In `js/level01.js` pass `false` to the method `game.setDebugMode()` 
 
-# Step 11 - Many Obstacles
+# TODO 11 - Many Obstacles
 
 Declare a function `createSawBlade` with two parameters `x` and `y`
 
@@ -402,7 +392,7 @@ Call `createSawBlade()` three times with different `x` and `y` arguments in orde
 
 ![Three saw blades](https://i.imgur.com/h1uGz6p.png)
 
-# Step 12 - Level Data
+# TODO 12 - Level Data
 
 In a professional game, the programmers write the code for a game engine which runs on data which is built by game designers. 
 This data, as well as all of the artwork, defines the entire world of the game. Separating the game code from the data allows you to easily modify the behavior and gameplay of the game without actually modifying the code. 
@@ -425,7 +415,7 @@ Add a couple more saw blades to your game, now by modifying the `levelData.gameI
 
 ![Lots Of saw blades](https://i.imgur.com/HXJtMAN.png)
 
-# Step 13 - Roll Your Own Obstacles
+# TODO 13 - Roll Your Own Obstacles
 
 You are now ready to add new kinds of obstacles to your game. To do this, decide what kinds of obstacle you want in your game and choose a name for it. As an example, I am going to create a very boring obstacle which I will call "box". **You** should name your obstacle something else, and change the code accordingly.
 
@@ -451,7 +441,7 @@ Then, modify `levelData` to add additional obstacles with that type. Here is an 
 
 Finally, modify your `levelData.gameItems` loop to handle that new type of obstacle. What property of `gameItem` can you use to choose which type of gameItem you'll create?
 
-# Step 14 - Enemies!
+# TODO 14 - Enemies!
 
 Obstacles are only one kind of thing you might find in a game. In most games, you have enemies you have to avoid or shoot as well as different items which you can collect to increase your score or give you powers. We started our game with obstacles because they were the simplest thing to make, but now that we understand the basics we can create more complex things for Halle to interact with.
 
@@ -506,7 +496,7 @@ When that is done correctly you should see a red square on the screen.
 
 Feel free to customize how your enemy looks. Try making it bigger or drawing some other shapes.
 
-# Step 15 - Game Item Properties
+# TODO 15 - Game Item Properties
 
 The variable `enemy` is an object created by `createGameItem()` which has a number of properties you can set in order to customize how the item behaves in the game. In this step, we are going to play around with those properties. You will write this code in `js/level01.js` anywhere after you have declared and initialized the `enemy` variable. 
 
@@ -595,7 +585,7 @@ enemy.fadeOut();
 
 Now use one of the behavior functions described above in the function assigned to `enemy.onProjectileCollision` to make the enemy disappear whenever Halle shoots it.
 
-# Step 16 - Design An Enemy
+# TODO 16 - Design An Enemy
 
 You now should know enough to make your own enemy. To get started, take all of the code you wrote in the last step and move it into a new function called `createEnemy`
 
@@ -625,7 +615,7 @@ Once you have completed this step, you will have a working enemy for your game. 
 
 Finally, add an object for your enemy locations in `levelData.gameItems` and then modify your code to create enemies from that data. 
 
-# Step 17 - Design A Reward
+# TODO 17 - Design A Reward
 
 Now that we have Obstacles and Enemies - we need a reward for HalleBot to get!
 
