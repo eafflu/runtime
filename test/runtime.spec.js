@@ -11,37 +11,37 @@ const
     level01 = require('../js/level01.js');
 
 describe('runtime', function() {
-    describe('index.html', function() {
-        const $ = cheerio.load(fs.readFileSync('index.html')),
-            scripts = $('script');
+    // describe('index.html', function() {
+    //     const $ = cheerio.load(fs.readFileSync('index.html')),
+    //         scripts = $('script');
 
-        var hasHud = false,
-            hasBackground = false,
-            hasLevel01 = false;
+    //     var hasHud = false,
+    //         hasBackground = false,
+    //         hasLevel01 = false;
         
-        var src;
-        for (var i = 0; i < scripts.length; i++) {
-            src = scripts[i].attribs.src;
-            if (src === 'js/view/hud.js') {
-                hasHud = true;
-            } else if (src === 'js/view/background.js') {
-                hasBackground = true;
-            } else if (src === 'js/level01.js') {
-                hasLevel01 = true;
-            }
-        }
-        it('should load hud.js', function() {
-            expect(hasHud).to.be.true;
-        });
+    //     var src;
+    //     for (var i = 0; i < scripts.length; i++) {
+    //         src = scripts[i].attribs.src;
+    //         if (src === 'js/view/hud.js') {
+    //             hasHud = true;
+    //         } else if (src === 'js/view/background.js') {
+    //             hasBackground = true;
+    //         } else if (src === 'js/level01.js') {
+    //             hasLevel01 = true;
+    //         }
+    //     }
+    //     it('should load hud.js', function() {
+    //         expect(hasHud).to.be.true;
+    //     });
         
-        it('should load background.js', function() {
-            expect(hasBackground).to.be.true;
-        });
+    //     it('should load background.js', function() {
+    //         expect(hasBackground).to.be.true;
+    //     });
         
-        it('should load level01.js', function() {
-            expect(hasLevel01).to.be.true;
-        });
-    });
+    //     it('should load level01.js', function() {
+    //         expect(hasLevel01).to.be.true;
+    //     });
+    // });
     
     describe('JavaScript', function() {
         background(window);
@@ -71,27 +71,22 @@ describe('runtime', function() {
                 done();
             });
             
-            it('should create a HUD with opspark.makeHud and add it to the view', function(done) {
-                expect(hudSpy.called, 'See Step 3 - Adding The Heads-Up Display').to.be.true;
+            it('TODO 1: should create a HUD with opspark.makeHud and add it to the view', function(done) {
+                expect(hudSpy.called, 'See TODO 1 - Adding The Heads-Up Display').to.be.true;
                 // expect(viewSpy.calledWith('hud'), 'must pass hud object to view.addChild() to add it to the view').to.be.true;
                 done();
             });
             
-            it('should create a background with opspark.makeBackground', function(done) {
+            it('TODO 2: should create a background with opspark.makeBackground', function(done) {
                 // this should be 2 to account for calling it later in this test spec
-                expect(bgSpy.called, 'See Step 4 - Adding A Background').to.be.true;
+                expect(bgSpy.called, 'See TODO 2 - Adding A Background').to.be.true;
                 // expect(opspark.app.view.addChild.calledWith('background'), 'must pass background object to view.addChild() to add it to the view').to.be.true;
                 done();
             });
             
-            it('should create a game manager with opspark.createGameManager', function(done) {
-                expect(opspark.createGameManager.called, 'See Step 9 - Setting Up Gameplay').to.be.true;
-                done();
-            });
-            
-            it('should call opspark.runLevelInGame', function(done) {
-                // this should be 2 to account for calling it later in this test spec
-                expect(opspark.runLevelInGame.called, 'See Step 9 - Setting Up Gameplay').to.be.true;
+            it('TODO 6: should create a game manager with opspark.createGameManager and call runLevelInGame', function(done) {
+                expect(opspark.createGameManager.called, 'missing game manager').to.be.true;
+                expect(opspark.runLevelInGame.called, 'call to runLevelInGame missing').to.be.true;
                 done();
             });
         });
@@ -108,7 +103,10 @@ describe('runtime', function() {
                 rectSpy = sinon.spy(draw, 'rect');
                 circleSpy = sinon.spy(draw, 'circle');
                 bitmapSpy = sinon.spy(draw, 'bitmap');
+                // empty the backgroundChildren array
+                window.backgroundChildren = [];
                 bg = opspark.makeBackground(app, ground);
+                
                 done();
             });
             
@@ -122,7 +120,7 @@ describe('runtime', function() {
 
             
             
-            it('should first create a background with draw.rect and set the color/height', function() {
+            it('TODO 2: should add a background with modify the color/height of backgroundFill', function() {
                 // run the student's code //
                 expect(draw.rect.called).to.be.true;
                 
@@ -135,10 +133,11 @@ describe('runtime', function() {
                 expect(backgroundFill.color).to.not.equal('yellow', "the background color must be changed from yellow");
             });
             
-            it('should add every drawn image to the background', function() {
+            it('TODO 3: Add an image to the background and add it using background.addChild()', function() {
                 // tally up all counts to the draw API and subtract 1 for the backgroundFill
                 var backgroundDrawCount = draw.bitmap.callCount + draw.rect.callCount + draw.line.callCount + draw.circle.callCount - 1;
-            
+                
+                expect(window.backgroundChildren.length > 0).to.be.true;
                 expect(window.backgroundChildren.length).to.equal(backgroundDrawCount, 'make sure you are adding each drawn shape to the background with background.addChild(shape)');
             
                 for (var i = 0; i < window.backgroundChildren.length; i++) {
@@ -148,7 +147,7 @@ describe('runtime', function() {
                 }
             });
             
-            it('should animate the background in the update function', function() {
+            it('TODO 4: Add animation to your background!', function() {
                 var bgXY = [];
                 for (var i = 0; i < window.backgroundChildren.length; i++) {
                     let element = window.backgroundChildren[i];
@@ -161,6 +160,30 @@ describe('runtime', function() {
                     if (element.x != bgXY[i].x || element.y != bgXY[i].y) isAnimating = true;
                 }
                 expect(isAnimating, 'change the x or y position of a background object in the update function to animate your background').to.be.true;
+            });
+            
+            it('TODO 5: Parallax Effect - You should have at least two elements moving at different speeds', function() {
+                var bgInitialXY = [];
+                for (var i = 0; i < window.backgroundChildren.length; i++) {
+                    let element = window.backgroundChildren[i];
+                    bgInitialXY.push({x: element.x, y: element.y});
+                }
+                bg.update();
+                var speed = 0;
+                var hasParallax = false;
+                for (var i = 0; i < window.backgroundChildren.length; i++) {
+                    let element = window.backgroundChildren[i];
+                    if (element.x != bgInitialXY[i].x) {
+                        if (speed && speed !== bgInitialXY[i].x - element.x) {
+                            hasParallax = true;
+                            break;
+                        } else {
+                            speed = bgInitialXY[i].x - element.x
+                        }
+                        
+                    }
+                }
+                expect(hasParallax, 'you should have at least 2 background elements with different horizontal speeds').to.be.true;
             });
         });
         
