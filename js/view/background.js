@@ -19,6 +19,8 @@ var background = function (window) {
         // container which will be returned
         var background;
         
+        // Add any variables that will be used by render AND update here:
+        
         // add objects for display inb ackground
         // called at the start of game and whenever the page is resized
         function render() {
@@ -34,13 +36,13 @@ var background = function (window) {
             var backgroundFill = draw.rect(canvasWidth,canvasHeight,'yellow');
             background.addChild(backgroundFill);
             
-            // TODO: 5 - Add a moon and starfield
+            // TODO: 3 - Add a moon and starfield
             
             
-            // TODO: 6 - Add a box
+            // TODO: 5 - Add buildings!     Q: This is before TODO 4 for a reason! Why?
             
             
-            // TODO: 8 - Add buildings!
+            // TODO 4: Part 1 - Add a tree
             
         }
         
@@ -52,7 +54,11 @@ var background = function (window) {
             var canvasHeight = app.canvas.height;
             var groundY = ground.y;
             
-            // TODO: 7 - Move the box!
+            // TODO 4: Part 2 - Move the tree!
+            
+            
+            // TODO 5: Part 2 - Parallax
+            
 
         }
 
