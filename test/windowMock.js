@@ -17,12 +17,14 @@ const ground = createjs.Container();
 const game = {
     ground: ground,
     groundY: ground.y, 
+    integrity: 0,
+    score: 0,
     setDebugMode: function() {},
     getScore: function() {},
     removeGameItem: function() {},
     setGameItemFactory: function() {},
     playLevel: function() {},
-    changeIntegrity: function() {},
+    changeIntegrity: function(change) {this.integrity += change},
     createObstacle: function(radius, damage) {
         var obstacle = this.createGameItem('obstacle', radius);
         obstacle.damage = damage;
@@ -42,7 +44,7 @@ const game = {
             }
         };
     },
-    increaseScore: function() {},
+    increaseScore: function(score) {this.score += score},
     addGameItem: function(gameItem) {
         windowMock.gameItems.push(gameItem);
     },

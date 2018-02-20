@@ -208,23 +208,34 @@ describe('runtime', function() {
                 expect(gameItem.x === undefined, 'you must create all gameItems with an x value').to.be.false;
                 expect(gameItem.y === undefined, 'you must create all gameItems with a y value').to.be.false;
                 expect(gameItem.image === undefined, 'you must create all gameItems with an image').to.be.false;
-                
                 if (gameItem.type === 'obstacle') { 
-                    hasObstacle = true;
                     expect(gameItem.damage === undefined, 'you must create obstacles with a damageFromObstacle value').to.be.false;
                     expect(gameItem.radius === undefined, 'you must create obstacles with a hitZoneSize value').to.be.false;               
-                   
+                    
+                    hasObstacle = true;
                     if (gameItem.image.loc != 'img/sawblade.png') {
                         hasCustomObstacle = true;
                     }
                 } else if (gameItem.type === 'enemy') { // check to see that they created at least one gameItem with type enemy
                     hasEnemy = true;
-                    
-                    if (!(gameItem.image.type === 'rect' && gameItem.image.width === 50 && gameItem.image.height === 50 && gameItem.image.color === 'red')) { // check to see that they did not use the provided red square for the enemy image
+                    var image = gameItem.image;
+                    if (!(image.type === 'rect' && image.width === 50 && image.height === 50 && image.color === 'red')) { // check to see that they did not use the provided red square for the enemy image
                         hasCustomEnemy = true;
                     }
                     if (!gameItem.hasOwnProperty('onPlayerCollision') || !gameItem.hasOwnProperty('onProjectileCollision') || !gameItem.hasOwnProperty('velocityX')) {
                         hasEnemyProps = false;
+                    } else {
+                        var integrity = game.integrity;
+                        gameItem.onPlayerCollision();
+                        if (game.integrity >= integrity) {
+                            hasEnemyProps = false;
+                        }
+                        
+                        var score = game.score;
+                        gameItem.onProjectileCollision();
+                        if (game.score <= score) {
+                            hasEnemyProps = false;
+                        }
                     }
                 } else if (gameItem.type === 'reward') {// check to see that they created at least one gameItem with type reward
                     hasReward = true;
@@ -234,37 +245,31 @@ describe('runtime', function() {
                     }
                 }
             }
-            it('should create at least 1 obstacle with a radius and damage using the createObstacle method', function() {
+            it('TODO 7: Create at least 1 obstacle with a radius and damage using the createObstacle method', function() {
                 expect(hasObstacle, 'you must create at least 1 obstacle!').to.be.true;
             });
             
-            it('should create at least 1 unique obstacle', function() {
+            it('TODO 10: Create at least 1 custom obstacle', function() {
                 expect(hasCustomObstacle, 'you must create at least 1 custom obstacle!').to.be.true;
             });
             
-            it('should create at least gameItem of type \'enemy\'', function() {
+            it('TODO 11: Create a gameItem of type \'enemy\'', function() {
                 expect(hasEnemy, 'you must create at least 1 enemy').to.be.true;
             });
             
-            it('should create a unique \'enemy\'', function() {
+            it('TODO 12: Add onPlayerCollision and onProjectileCollision to your enemy', function() {
+                expect(hasEnemy && hasEnemyProps, 'enemies must have velocityX defined. onPlayerCollision should lower the integrity and onProjectileCollision should increase the score!').to.be.true;
+            });
+            
+            it('TODO 13: Design your own enemy!', function() {
                 expect(hasCustomEnemy, 'you must create at least 1 unique enemy').to.be.true;
             });
             
-            it('enemies should have a onPlayerCollision and onProjectileCollision method', function() {
-                expect(hasEnemy && hasEnemyProps, 'enemies must have velocityX and methods onPlayerCollision / onProjectileCollision defined!').to.be.true;
-            });
-            
-            it('should create a gameItem of type \'reward\'', function() {
+            it('TODO 14: Create a gameItem of type \'reward\'', function() {
                 expect(hasReward, 'you must create at least 1 reward!').to.be.true;
+                expect(hasReward && hasRewardProps, 'reward should the onPlayerCollision method defined').to.be.true;
             });
             
-            it('reward should the onPlayerCollision method defined', function() {
-                expect(hasReward && hasRewardProps, 'set onPlayerCollision method for your reward obstacle').to.be.true;
-            });
-            
-            it('use levelData to create obstacles, enemies, and rewards', function() {
-               expect(window.levelData.gameItems.length > 3, 'fill the levelData.gameItems array with your data for each game item!').to.be.true; 
-            });
         });
     });
 });
