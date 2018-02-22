@@ -244,7 +244,7 @@ You should now see the tree moving. What happened? Why is it doing that? Make su
 Try adding the following code to `update()`
 
 ```js
-if(tree.x < -100) {
+if(tree.x < -200) {
     tree.x = canvasWidth;
 }
 ```
