@@ -1,5 +1,4 @@
 <!doctype html>
-
 <html>
     <head>
         <meta charset="utf-8">
@@ -33,17 +32,18 @@
         <script src="js/orb/orbManager.js"></script>
         <script src="js/projectile/projectileManager.js"></script>
         <script src="js/view/pacifier.js"></script>
+        <script src="js/view/background.js"></script>
         <script src="js/view/ground.js"></script>
+        <script src="js/view/hud.js"></script>
         <script src="js/player/halle.js"></script>
         <script src="js/player/playerManager.js"></script>
         <script src="js/opspark.js"></script>
         <script src="js/game.js"></script>
+        <script src="js/init.js"></script>
+        <script src="js/level01.js"></script>
+        
+        <!--Load Additional Scripts Here-->
 
-       <!-- add any additional scripts here -->
-
-        <style type="text/css">
-            /*override default styles here*/
-        </style>
     </head>
     <body>
         <div id="main">
@@ -52,79 +52,9 @@
         <script id="index">
             (function(){
                 'use strict';
-                
-                var 
-                    opspark = window.opspark,
-                    draw = opspark.draw,
-                    physikz = opspark.racket.physikz,
-                    world = opspark.world,
-                    
-                    data = 'assets/spritesheet/halle/data-v9.json',
-                    app = opspark.makeApp(world.makeRules()),
-                    canvas = app.canvas, 
-                    view = app.view,
-                    fps = draw.fps('#000');
-                
-                var 
-                    space, 
-                    rules,
-                    ground,
-                    spritesheet,
-                    halle,
-                    hud, 
-                    orbManager, 
-                    playerManager, 
-                    particleManager;
-                
-                var debugHalleHitZones = false;
-
-                space = app.space;
-                rules = app.rules,
-                particleManager = opspark.makeParticleManager(app.stage);
-                ground = opspark.makeGround(app);
-
-                // TODO 2 : add background
-                
-                var help = draw.textfield('MOVES || w: jump | e: flying jump | s: duck | space: fire | q your mom!', 
-                    '20px Arial',
-                    '#ccc', 'left');
-                help.x = 10;
-                help.y = ground.y + ground.getBounds().height + 10;
-                view.addChild(help);
-                
-                window.opspark.makeSpriteSheet(data)
-                    .then(function (ss) {
-                        spritesheet = ss;
-                        halle = window.opspark.makeHalle(spritesheet, particleManager,debugHalleHitZones);
-                        halle.x = halle.getBounds().width * 2;
-                        halle.y = ground.y - halle.getBounds().height + 3;
-                        app.addUpdateable(halle);
-                        view.addChild(halle);
-                        
-                        playerManager = opspark.makePlayerManager(
-                            halle, 
-                            app, 
-                            opspark.makeProjectileManager(view, space, particleManager));
-                        
-                        app.addUpdateable(playerManager);
-                        app.addUpdateable({update: update});
-                    });
-                
-                view.addChild(fps);
-                app.addUpdateable(fps);
-                
-                function update() {
-                    space.forEach(function (body) {
-                        physikz.updatePosition(body);
-                        physikz.updateSpace(space, physikz.hitTestRadial, rules.handleCollision);
-                        playerManager.hitTest(body);
-                    });
-                }
-                
-                // TODO 1 : add a heads-up display to game
-
-                // TODO 3 : create game manager
-
+                background(window);
+                level01(window);
+                init(window);
             })();
         </script>
     </body>
