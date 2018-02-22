@@ -3,45 +3,12 @@
 const
     expect = require('chai').expect,
     sinon = require('sinon'),
-    cheerio = require('cheerio'),
-    fs = require('fs'),
     window = require('../test/windowMock.js'),
-    init = require('../js/init.js'),
-    background = require('../js/view/background.js'),
-    level01 = require('../js/level01.js');
+    init = require('js/init.js'),
+    background = require('js/view/background.js'),
+    level01 = require('js/level01.js');
 
 describe('runtime', function() {
-    // describe('index.html', function() {
-    //     const $ = cheerio.load(fs.readFileSync('index.html')),
-    //         scripts = $('script');
-
-    //     var hasHud = false,
-    //         hasBackground = false,
-    //         hasLevel01 = false;
-        
-    //     var src;
-    //     for (var i = 0; i < scripts.length; i++) {
-    //         src = scripts[i].attribs.src;
-    //         if (src === 'js/view/hud.js') {
-    //             hasHud = true;
-    //         } else if (src === 'js/view/background.js') {
-    //             hasBackground = true;
-    //         } else if (src === 'js/level01.js') {
-    //             hasLevel01 = true;
-    //         }
-    //     }
-    //     it('should load hud.js', function() {
-    //         expect(hasHud).to.be.true;
-    //     });
-        
-    //     it('should load background.js', function() {
-    //         expect(hasBackground).to.be.true;
-    //     });
-        
-    //     it('should load level01.js', function() {
-    //         expect(hasLevel01).to.be.true;
-    //     });
-    // });
     
     describe('JavaScript', function() {
         background(window);
