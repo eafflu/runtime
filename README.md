@@ -239,7 +239,7 @@ In the `update()` function, add the following code:
 
 You should now see the tree moving. What happened? Why is it doing that? Make sure you understand and make sure your partner (if you are pairing) understands as well. 
 
-**Change the code so that the box moves towards Halle**
+**Change the code so that the tree moves towards Halle**
 
 Try adding the following code to `update()`
 
@@ -327,12 +327,10 @@ Add this code below the comment that says `// BEGIN EDITING YOUR CODE HERE`
 
 This code declares a variable `myObstacle` and creates a new obstacle using the game's `createObstacle()` function. The `createObstacle` function takes two parameters which define the size of the object (`hitZoneSize`) and how much damage the obstacle does when it collides with Halle (`damageFromObstacle`)
 
-Add this code to the code you just wrote
+Now, let's position that obstacle somewhere on screen by modifying the `x` and `y` properties of `myObstacle` Add this code to the code you just wrote:
 
     myObstacle.x = 400;
     myObstacle.y = 100;
-
-This position that obstacle somewhere on screen by modifying the `x` and `y` properties of `myObstacle` 
 
 Finally, add this code:
 
@@ -599,7 +597,7 @@ You now should know enough to make your own enemy. To get started, take all of t
 
 ```js
 function createEnemy() {
-    // all code from step 14
+    // all code from TODO 12
 }
 ```
 
