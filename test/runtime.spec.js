@@ -4,9 +4,9 @@ const
     expect = require('chai').expect,
     sinon = require('sinon'),
     window = require('../test/windowMock.js'),
-    init = require('js/init.js'),
-    background = require('js/view/background.js'),
-    level01 = require('js/level01.js');
+    init = require('../js/init.js'),
+    background = require('../js/view/background.js'),
+    level01 = require('../js/level01.js');
 
 describe('runtime', function() {
     
