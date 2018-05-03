@@ -38,7 +38,7 @@
            then hallie dies and the game ends
          */
         function changeIntegrity(amount) {
-            health += amount;
+            health = Math.min(health + amount, 100);
             console.log("setting integrity = ",health);
             hud.setIntegrity(health);
             if(health <= 0) {
