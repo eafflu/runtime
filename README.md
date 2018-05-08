@@ -379,7 +379,7 @@ When we always want to execute a series of code in a particular order, it is bes
 Declare a function `createSawBlade` with two parameters `x` and `y`
 
 ```js
-var createSawBlade = function(x,y) {
+function createSawBlade(x,y) {
     // your code goes here
 }  
 ```
@@ -428,7 +428,7 @@ You are now ready to add new kinds of obstacles to your game. To do this, decide
 First, write a function that creates your obstacle
 
 ```js
-var createBox = function(x,y) {
+function createBox(x,y) {
     // ????
 };
 ```
